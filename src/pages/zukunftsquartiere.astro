@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import karteImage from "../assets/images/67c59b1209c3d1134e556e13_Karte.avif";
-import blobA from "../assets/images/blob-brix-templates.svg";
 import wohnenIcon from "../assets/images/Wohnen.avif";
 import arbeitenIcon from "../assets/images/Arbeiten.avif";
 import bildungIcon from "../assets/images/Bildung.avif";
@@ -51,12 +51,12 @@ const downloads = [
       {
         title: "Abschlussdokumentation Werkstattverfahren",
         text: "Eine umfassende Dokumentation zum Werkstattverfahren – mit allen Planungsentwürfen und Hintergrundinformationen rund um das Verfahren.",
-        href: "/documents/Abschlussdokumentation_Werkstattverfahren.pdf",
+        href: withBase("/documents/Abschlussdokumentation_Werkstattverfahren.pdf"),
       },
       {
         title: "Dokumentation Online-Dialog Werkstattverfahren",
         text: "Eine detaillierte Auswertung eines Online-Beteiligungsformats im Vorfeld des Werkstattverfahrens.",
-        href: "/documents/dokumentation_onlinedialog_neues_stadtquartier.pdf",
+        href: withBase("/documents/dokumentation_onlinedialog_neues_stadtquartier.pdf"),
       },
     ],
   },
@@ -66,12 +66,12 @@ const downloads = [
       {
         title: "Abschlusspräsentation ADEPT Werkstattverfahren",
         text: "Die beim Werkstattverfahren gezeigte finale Präsentation zum Zielkonzept des Teams ADEPT.",
-        href: "/documents/01_LU_LCE_ASW_ADEPT-2.pdf",
+        href: withBase("/documents/01_LU_LCE_ASW_ADEPT-2.pdf"),
       },
       {
         title: "Präsentation Stadtrat am 22.09.2025",
         text: "Die in der Stadtratssitzung am 22.09.2025 gezeigte Rahmenpräsentation zur Vorstellung der Ergebnisse des Werkstattverfahrens.",
-        href: "/documents/Praesentation-Stadtrat_inkl_ADEPT.pdf",
+        href: withBase("/documents/Praesentation-Stadtrat_inkl_ADEPT.pdf"),
       },
     ],
   },
@@ -81,7 +81,7 @@ const downloads = [
       {
         title: "Pressemeldung Werkstattverfahren",
         text: "Pressemeldung zur Auftaktwerkstatt am 12.09.2024. Mit dieser Auftaktveranstaltung begann das rund viermonatige Werkstattverfahren.",
-        href: "/documents/pressemeldung_werkstattverfahren_neues_stadtquartier.pdf",
+        href: withBase("/documents/pressemeldung_werkstattverfahren_neues_stadtquartier.pdf"),
       },
     ],
   },
@@ -96,7 +96,7 @@ const downloads = [
     <div class="container hero__grid">
       <div>
         <h1>Zukunftsquartiere rund um die Helmut-Kohl-Allee</h1>
-        <p class="hero__lead">
+        <p class="lead">
           Die Zukunftsquartiere rund um die geplante Helmut-Kohl-Allee zählen zu den
           bedeutendsten Stadtentwicklungsprojekten in Ludwigshafen und der Metropolregion
           Rhein-Neckar. Entlang einer der wichtigsten Verkehrsachsen der Region entstehen neue
@@ -104,8 +104,8 @@ const downloads = [
           Relevanz.
         </p>
         <div class="hero__actions">
-          <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
-          <a href="/ueber-uns" class="btn btn-secondary btn-on-light">Über die LCE</a>
+          <a href={withBase("/kontakt")} class="btn btn-primary">Kontakt für Investoren</a>
+          <a href={withBase("/ueber-uns")} class="btn btn-secondary btn-on-light">Über die LCE</a>
         </div>
       </div>
       <figure class="hero__figure">
@@ -113,7 +113,6 @@ const downloads = [
         <figcaption>Stadtgrundkarte – Stadtverwaltung Ludwigshafen am Rhein</figcaption>
       </figure>
     </div>
-    <Image src={blobA} alt="" aria-hidden="true" class="hero__blob" />
   </section>
 
   <section class="section">
@@ -163,7 +162,7 @@ const downloads = [
       <div class="grid grid-2">
         {
           standortvorteile.map((item) => (
-            <div class="card standort-card">
+            <div class="stat-tile standort-card">
               <Image src={item.icon} alt="" aria-hidden="true" width={56} height={56} />
               <div>
                 <h3>{item.title}</h3>
@@ -282,8 +281,16 @@ const downloads = [
     position: relative;
     z-index: 1;
   }
-  .hero__lead {
-    font-size: 1.1rem;
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto auto;
+    width: 480px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(161, 173, 70, 0.18), rgba(161, 173, 70, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
   }
   .hero__actions {
     display: flex;
@@ -298,6 +305,7 @@ const downloads = [
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     width: 100%;
+    max-height: 380px;
     aspect-ratio: 4/3;
     object-fit: cover;
   }
@@ -306,18 +314,13 @@ const downloads = [
     font-size: 0.85rem;
     color: var(--color-text-muted);
   }
-  .hero__blob {
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 500px;
-    opacity: 0.12;
-    z-index: 0;
-    pointer-events: none;
-  }
   @media (max-width: 900px) {
     .hero__grid {
       grid-template-columns: 1fr;
+    }
+    .hero__figure :global(img) {
+      max-height: 260px;
+      aspect-ratio: 16 / 10;
     }
   }
 
@@ -364,6 +367,7 @@ const downloads = [
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     width: 100%;
+    max-height: 360px;
     aspect-ratio: 4/3;
     object-fit: cover;
   }
@@ -379,6 +383,10 @@ const downloads = [
     }
     .planungsstand__row--reverse .planungsstand__figure {
       order: initial;
+    }
+    .planungsstand__figure :global(img) {
+      max-height: 240px;
+      aspect-ratio: 16 / 10;
     }
   }
 
@@ -447,7 +455,7 @@ const downloads = [
   .downloads__link {
     font-weight: 700;
     text-decoration: none;
-    color: var(--color-primary-dark);
+    color: var(--color-highlight);
     white-space: nowrap;
   }
 </style>

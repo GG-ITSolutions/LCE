@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
 ---
 
 <BaseLayout
@@ -16,8 +17,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         die Navigation oder einen der folgenden Links, um weiterzukommen.
       </p>
       <div class="hero__actions" style="justify-content: center; display:flex; gap:1rem; flex-wrap:wrap;">
-        <a href="/" class="btn btn-primary">Zur Startseite</a>
-        <a href="/kontakt" class="btn btn-secondary btn-on-light">Kontakt aufnehmen</a>
+        <a href={withBase("/")} class="btn btn-primary">Zur Startseite</a>
+        <a href={withBase("/kontakt")} class="btn btn-secondary btn-on-light">Kontakt aufnehmen</a>
       </div>
     </div>
   </section>

@@ -1,12 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import heroImage from "../assets/images/Design-ohne-Titel-36.png";
-import glow from "../assets/images/Glow2.png";
 import teamImage from "../assets/images/Design-ohne-Titel-18.png";
 import karteImage from "../assets/images/67c59b1209c3d1134e556e13_Karte.avif";
-import patternA from "../assets/images/pattern-cta-v12-brix-templates-01.svg";
-import patternB from "../assets/images/pattern-cta-v3-brix-templates-01.svg";
 
 const kennzahlen = [
   {
@@ -41,17 +39,17 @@ const kennzahlen = [
       <div class="hero__text">
         <p class="eyebrow">Kommunale Entwicklungsgesellschaft</p>
         <h1>LCE – für Wohnen, Wirtschaft und Innovation in Ludwigshafen.</h1>
-        <p class="hero__lead">
+        <p class="lead">
           Als kommunale Entwicklungsgesellschaft schaffen wir die Grundlagen für die neuen
           Stadtquartiere – Schritt für Schritt, transparent und planungssicher.
         </p>
         <div class="hero__actions">
-          <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
-          <a href="/ueber-uns" class="btn btn-secondary btn-on-light">Über die LCE</a>
+          <a href={withBase("/kontakt")} class="btn btn-primary">Kontakt für Investoren</a>
+          <a href={withBase("/ueber-uns")} class="btn btn-secondary btn-on-light">Über die LCE</a>
         </div>
       </div>
       <div class="hero__visual">
-        <Image src={glow} alt="" aria-hidden="true" class="hero__glow" widths={[430, 860]} sizes="(max-width: 860px) 60vw, 430px" />
+        <div class="hero__glow" aria-hidden="true"></div>
         <Image
           src={heroImage}
           alt="3D-Visualisierung der geplanten Zukunftsquartiere entlang der Helmut-Kohl-Allee (Konzept ADEPT)"
@@ -83,7 +81,7 @@ const kennzahlen = [
             Projektsteuerung und Wirtschaft, um zukunftsfähige und nachhaltige Quartiere zu
             realisieren.
           </p>
-          <a href="/ueber-uns" class="overview__link">Mehr über uns →</a>
+          <a href={withBase("/ueber-uns")} class="accent-link">Mehr über uns →</a>
         </div>
         <div class="overview__image">
           <Image src={teamImage} alt="Das LCE-Team bespricht das Städtebaumodell der Zukunftsquartiere" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
@@ -102,7 +100,7 @@ const kennzahlen = [
             innovative und nachhaltige Quartiere, die ökonomischen, ökologischen und sozialen
             Herausforderungen gerecht werden.
           </p>
-          <a href="/zukunftsquartiere" class="overview__link">Mehr zu den Zukunftsquartieren →</a>
+          <a href={withBase("/zukunftsquartiere")} class="accent-link">Mehr zu den Zukunftsquartieren →</a>
         </div>
       </div>
     </div>
@@ -117,7 +115,7 @@ const kennzahlen = [
       <div class="grid grid-4 kennzahlen">
         {
           kennzahlen.map((item) => (
-            <div class="card kennzahlen__card">
+            <div class="stat-tile">
               <div class="kennzahlen__value">{item.value}</div>
               <div class="kennzahlen__label">{item.label}</div>
               <p>{item.text}</p>
@@ -131,10 +129,8 @@ const kennzahlen = [
   <section class="section">
     <div class="container">
       <div class="cta-card">
-        <Image src={patternA} alt="" aria-hidden="true" class="cta-card__pattern cta-card__pattern--a" />
-        <Image src={patternB} alt="" aria-hidden="true" class="cta-card__pattern cta-card__pattern--b" />
         <h2>Sie interessieren sich für Entwicklungspotenziale der Zukunftsquartiere? Sprechen Sie uns an!</h2>
-        <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
+        <a href={withBase("/kontakt")} class="btn btn-primary">Kontakt für Investoren</a>
       </div>
     </div>
   </section>
@@ -147,9 +143,6 @@ const kennzahlen = [
     gap: clamp(2rem, 4vw, 4rem);
     align-items: center;
   }
-  .hero__lead {
-    font-size: 1.15rem;
-  }
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
@@ -161,14 +154,20 @@ const kennzahlen = [
   }
   .hero__glow {
     position: absolute;
-    inset: -10% -10% auto auto;
-    width: 60%;
+    inset: -15% -15% auto auto;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(161, 173, 70, 0.35), rgba(161, 173, 70, 0) 70%);
     z-index: 0;
-    opacity: 0.7;
   }
   .hero__image {
     position: relative;
     z-index: 1;
+    width: 100%;
+    max-height: 420px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
   }
@@ -178,6 +177,10 @@ const kennzahlen = [
     }
     .hero__visual {
       order: -1;
+    }
+    .hero__image {
+      max-height: 280px;
+      aspect-ratio: 16 / 10;
     }
   }
 
@@ -200,13 +203,11 @@ const kennzahlen = [
     aspect-ratio: 4 / 3;
     object-fit: cover;
     width: 100%;
+    max-height: 360px;
   }
-  .overview__link {
+  .accent-link {
     display: inline-block;
     margin-top: 0.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    color: var(--color-primary-dark);
   }
   @media (max-width: 760px) {
     .overview__row,
@@ -215,6 +216,10 @@ const kennzahlen = [
     }
     .overview__row--reverse .overview__image {
       order: -1;
+    }
+    .overview__image :global(img) {
+      aspect-ratio: 16 / 10;
+      max-height: 240px;
     }
   }
 
@@ -236,7 +241,7 @@ const kennzahlen = [
   .cta-card {
     position: relative;
     overflow: hidden;
-    background: var(--color-secondary);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
     color: #fff;
     border-radius: var(--radius-lg);
     padding: clamp(2.5rem, 5vw, 4rem);
@@ -246,29 +251,20 @@ const kennzahlen = [
     justify-content: space-between;
     gap: 2rem;
   }
+  .cta-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(161, 173, 70, 0.35), transparent 55%);
+    pointer-events: none;
+  }
   .cta-card h2 {
     color: #fff;
     max-width: 40ch;
     margin: 0;
-  }
-  .cta-card__pattern {
-    position: absolute;
-    z-index: 0;
-    opacity: 0.35;
-    pointer-events: none;
-  }
-  .cta-card__pattern--a {
-    top: -20%;
-    right: -10%;
-    width: 260px;
-  }
-  .cta-card__pattern--b {
-    bottom: -30%;
-    left: -10%;
-    width: 220px;
-  }
-  .cta-card > :global(*:not(.cta-card__pattern)) {
     position: relative;
-    z-index: 1;
+  }
+  .cta-card > :global(.btn) {
+    position: relative;
   }
 </style>

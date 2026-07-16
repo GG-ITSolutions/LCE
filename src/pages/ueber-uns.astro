@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import heroImage from "../assets/images/Design-ohne-Titel-19.png";
-import glow from "../assets/images/Glow2.png";
 import iconMission from "../assets/images/1.png";
 import iconGanzheitlich from "../assets/images/2.png";
 import iconPlanungssicher from "../assets/images/3.png";
@@ -41,7 +41,7 @@ const history = [
   {
     year: "2003",
     title: "Rheinufer Süd Entwicklungs-GmbH",
-    text: 'Gründung der Rheinufer Süd Entwicklungs-GmbH (RSE) zur Entwicklung städtebaulich relevanter Flächen und zur Umsetzung zentraler Entwicklungsprojekte in Ludwigshafen. Insbesondere die <a href="/documents/Brochure-RSE.pdf">Entwicklung des Stadtquartiers Rheinufer Süd</a> prägte die Arbeit der Gesellschaft.',
+    text: `Gründung der Rheinufer Süd Entwicklungs-GmbH (RSE) zur Entwicklung städtebaulich relevanter Flächen und zur Umsetzung zentraler Entwicklungsprojekte in Ludwigshafen. Insbesondere die <a href="${withBase("/documents/Brochure-RSE.pdf")}">Entwicklung des Stadtquartiers Rheinufer Süd</a> prägte die Arbeit der Gesellschaft.`,
   },
   {
     year: "2020",
@@ -81,19 +81,19 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     <div class="container hero__grid">
       <div>
         <h1>Über die LCE<br /><span class="hero__sub">Stadtentwicklung mit klarer Verantwortung.</span></h1>
-        <p class="hero__lead">
+        <p class="lead">
           Die LCE ist eine gemeinsame Gesellschaft der Stadt Ludwigshafen und der GAG
           Ludwigshafen. Als kommunale Entwicklungsgesellschaft verantwortet die LCE die
           Entwicklung und Vermarktung von Bauflächen in Ludwigshafen – im Fokus stehen die
           Flächen entlang der Helmut-Kohl-Allee sowie weitere zentrale Innenstadtlagen.
         </p>
         <div class="hero__actions">
-          <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
-          <a href="/zukunftsquartiere" class="btn btn-secondary btn-on-light">Zukunftsquartiere entdecken</a>
+          <a href={withBase("/kontakt")} class="btn btn-primary">Kontakt für Investoren</a>
+          <a href={withBase("/zukunftsquartiere")} class="btn btn-secondary btn-on-light">Zukunftsquartiere entdecken</a>
         </div>
       </div>
       <div class="hero__visual">
-        <Image src={glow} alt="" aria-hidden="true" class="hero__glow" widths={[430, 860]} sizes="430px" />
+        <div class="hero__glow" aria-hidden="true"></div>
         <Image
           src={heroImage}
           alt="Das LCE-Team im Gespräch am Städtebaumodell der Zukunftsquartiere"
@@ -108,7 +108,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   <section class="section">
     <div class="container">
       <h2>Wofür die LCE steht</h2>
-      <p class="lead-text">
+      <p class="lead">
         Ein wesentlicher Aufgabenbereich der LCE ist die Vorbereitung städtebaulicher
         Planungen. Dazu zählen die Beauftragung und Koordination von Untersuchungen,
         Planungs- und Machbarkeitsstudien sowie die Steuerung komplexer Planungsverfahren.
@@ -138,7 +138,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
       <ol class="grid grid-3 timeline">
         {
           history.map((entry) => (
-            <li class="card timeline__item">
+            <li class="timeline__item">
               <div class="timeline__year">{entry.year}</div>
               <h3>{entry.title}</h3>
               <p set:html={entry.text} />
@@ -165,7 +165,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
           team.map((member) => {
             const Wrapper = member.data.hasProfile ? "a" : "div";
             const wrapperProps = member.data.hasProfile
-              ? { href: `/team/${member.slug}` }
+              ? { href: withBase(`/team/${member.slug}`) }
               : {};
             return (
               <div class="card team-card">
@@ -175,7 +175,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
                 </Wrapper>
                 <h3>
                   {member.data.hasProfile ? (
-                    <a href={`/team/${member.slug}`}>{member.data.name}</a>
+                    <a href={withBase(`/team/${member.slug}`)}>{member.data.name}</a>
                   ) : (
                     <a href={`mailto:${member.data.email}`}>{member.data.name}</a>
                   )}
@@ -256,9 +256,6 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   .hero__sub {
     color: var(--color-primary-dark);
   }
-  .hero__lead {
-    font-size: 1.1rem;
-  }
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
@@ -270,10 +267,12 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   }
   .hero__glow {
     position: absolute;
-    inset: -10% -10% auto auto;
-    width: 55%;
+    inset: -15% -15% auto auto;
+    width: 65%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 159, 227, 0.25), rgba(0, 159, 227, 0) 70%);
     z-index: 0;
-    opacity: 0.7;
   }
   .hero__image {
     position: relative;
@@ -281,6 +280,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     width: 100%;
+    max-height: 420px;
     aspect-ratio: 4/3;
     object-fit: cover;
   }
@@ -291,11 +291,13 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     .hero__visual {
       order: -1;
     }
+    .hero__image {
+      max-height: 280px;
+      aspect-ratio: 16 / 10;
+    }
   }
 
-  .lead-text {
-    max-width: 70ch;
-    font-size: 1.05rem;
+  .lead {
     margin-bottom: 2.5rem;
   }
   .values {
@@ -313,6 +315,10 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     padding: 0;
     margin: 0;
   }
+  .timeline__item {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1.25rem;
+  }
   .timeline__year {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -321,7 +327,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     margin-bottom: 0.5rem;
   }
   .timeline__item :global(a) {
-    color: var(--color-primary-dark);
+    color: var(--color-highlight);
     font-weight: 600;
   }
 
@@ -383,6 +389,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     width: 100%;
+    max-height: 420px;
     aspect-ratio: 4/5;
     object-fit: cover;
   }
@@ -418,6 +425,10 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     }
     .testimonial__image {
       order: -1;
+    }
+    .testimonial__image :global(img) {
+      max-height: 280px;
+      aspect-ratio: 16 / 10;
     }
   }
 </style>

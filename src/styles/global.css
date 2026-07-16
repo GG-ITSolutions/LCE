@@ -27,49 +27,7 @@
   --focus-ring: 0 0 0 3px rgba(0, 159, 227, 0.5);
 }
 
-/* ---------- Fonts (self-hosted, subset woff2) ---------- */
-@font-face {
-  font-family: "DINOffc";
-  src: url("/fonts/DINOffc-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "DINOffc";
-  src: url("/fonts/DINOffc.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "DINOffc";
-  src: url("/fonts/DINOffc-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: url("/fonts/SourceSansPro-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: url("/fonts/SourceSansPro-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: url("/fonts/SourceSansPro-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Fonts are registered by the <Fonts /> component (imported asset URLs, base-path safe) */
 
 /* ---------- Reset ---------- */
 *,
@@ -167,6 +125,21 @@ ul {
   color: var(--color-primary-dark);
   margin-bottom: 0.75rem;
 }
+.lead {
+  font-size: 1.125rem;
+  max-width: 62ch;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Accent text links (distinct from buttons/stat numbers) ---------- */
+.accent-link {
+  color: var(--color-highlight);
+  font-weight: 700;
+  text-decoration: none;
+}
+.accent-link:hover {
+  text-decoration: underline;
+}
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -243,6 +216,25 @@ select:focus-visible,
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: clamp(1.5rem, 2vw, 2.25rem);
+}
+
+/* Lighter alternative to .card for data/text tiles (stats, timeline) so photo
+   cards keep the visual weight and plain data doesn't compete with them */
+.stat-tile {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+.stat-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--color-primary);
 }
 
 /* ---------- Grids ---------- */

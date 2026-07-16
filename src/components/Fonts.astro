@@ -1,0 +1,21 @@
+---
+import dinLight from "../assets/fonts/DINOffc-Light.woff2?url";
+import dinRegular from "../assets/fonts/DINOffc.woff2?url";
+import dinBold from "../assets/fonts/DINOffc-Bold.woff2?url";
+import sourceLight from "../assets/fonts/SourceSansPro-Light.woff2?url";
+import sourceRegular from "../assets/fonts/SourceSansPro-Regular.woff2?url";
+import sourceBold from "../assets/fonts/SourceSansPro-Bold.woff2?url";
+
+const fontFaceCss = `
+  @font-face { font-family: "DINOffc"; src: url("${dinLight}") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "DINOffc"; src: url("${dinRegular}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "DINOffc"; src: url("${dinBold}") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "SourceSansPro"; src: url("${sourceLight}") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "SourceSansPro"; src: url("${sourceRegular}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "SourceSansPro"; src: url("${sourceBold}") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+`;
+---
+
+<link rel="preload" href={sourceRegular} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={dinBold} as="font" type="font/woff2" crossorigin />
+<style set:html={fontFaceCss} />

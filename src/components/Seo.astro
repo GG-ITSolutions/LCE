@@ -10,8 +10,17 @@ const { title, description, image, noindex = false } = Astro.props;
 
 const siteName = "LCE – Ludwigshafener Cité Entwicklungsgesellschaft";
 const fullTitle = title === siteName ? title : `${title} | LCE`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(image ?? "/og-image.jpg", Astro.site);
+// Astro.url.pathname includes the build's `base` prefix (e.g. "/LCE" on the GitHub Pages
+// preview); strip it so the canonical/OG URL always describes the real production path,
+// never a mix of the preview's subpath and the production domain.
+const base = import.meta.env.BASE_URL;
+const canonicalPath = Astro.url.pathname.startsWith(base)
+  ? Astro.url.pathname.slice(base.length)
+  : Astro.url.pathname;
+const canonicalURL = new URL(canonicalPath, Astro.site);
+// Deliberately anchored to the real production domain (not the current build's base
+// path) — same reasoning as canonicalURL above.
+const ogImage = new URL(image ?? "og-image.jpg", Astro.site);
 ---
 
 <title>{fullTitle}</title>

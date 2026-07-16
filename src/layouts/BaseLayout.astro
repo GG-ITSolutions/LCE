@@ -2,6 +2,8 @@
 import Seo from "../components/Seo.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Fonts from "../components/Fonts.astro";
+import { withBase } from "../lib/paths";
 import "../styles/global.css";
 
 interface Props {
@@ -11,7 +13,11 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, image, noindex } = Astro.props;
+const { title, description, image } = Astro.props;
+// The free GitHub Pages preview is a separate, non-canonical copy of the site — it must
+// never get indexed by search engines instead of (or alongside) the real production domain.
+const isPreviewBuild = process.env.DEPLOY_TARGET === "gh-pages";
+const noindex = Astro.props.noindex || isPreviewBuild;
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -44,11 +50,10 @@ const organizationSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Seo title={title} description={description} image={image} noindex={noindex} />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" href="/fonts/SourceSansPro-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/DINOffc-Bold.woff2" as="font" type="font/woff2" crossorigin />
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <link rel="icon" href={withBase("favicon.ico")} sizes="any" />
+    <link rel="apple-touch-icon" href={withBase("apple-touch-icon.png")} />
+    <Fonts />
+    {!isPreviewBuild && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
   </head>
   <body>
     <a href="#main" class="skip-link">Zum Inhalt springen</a>

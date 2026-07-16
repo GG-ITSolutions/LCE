@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import iconMail from "../assets/images/1_2.png";
 import iconPhone from "../assets/images/2_3.png";
@@ -106,7 +107,7 @@ const faqs = [
               <label class="checkbox">
                 <input type="checkbox" id="Datenschutz" name="Datenschutz" required />
                 <span>
-                  Ich akzeptiere die <a href="/datenschutz">Datenschutzbestimmungen</a>. Mit
+                  Ich akzeptiere die <a href={withBase("/datenschutz")}>Datenschutzbestimmungen</a>. Mit
                   dem Absenden des Formulars stimmen Sie der Verarbeitung Ihrer Angaben zur
                   Bearbeitung Ihrer Anfrage zu.
                 </span>
@@ -188,10 +189,6 @@ const faqs = [
     gap: clamp(2rem, 4vw, 3rem);
     align-items: start;
   }
-  .lead {
-    font-size: 1.05rem;
-    max-width: 60ch;
-  }
   @media (max-width: 900px) {
     .kontakt-grid {
       grid-template-columns: 1fr;
@@ -205,6 +202,11 @@ const faqs = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
+  }
+  @media (max-width: 560px) {
+    .kontakt-form__grid {
+      grid-template-columns: 1fr;
+    }
   }
   .field--full {
     grid-column: 1 / -1;

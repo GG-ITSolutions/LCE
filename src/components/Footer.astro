@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/images/Logo-LCE-2048-x-818-1.png";
+import { withBase } from "../lib/paths";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -13,13 +14,13 @@ const year = 2026;
 
 <footer class="site-footer">
   <div class="container site-footer__top">
-    <a href="/" class="site-footer__logo" aria-label="LCE – Startseite">
+    <a href={withBase("/")} class="site-footer__logo" aria-label="LCE – Startseite">
       <Image src={logo} alt="LCE Logo" width={140} height={56} />
     </a>
     <nav aria-label="Footer-Navigation">
       <ul class="site-footer__nav">
         {navItems.map((item) => (
-          <li><a href={item.href}>{item.label}</a></li>
+          <li><a href={withBase(item.href)}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -27,8 +28,8 @@ const year = 2026;
   <div class="container site-footer__bottom">
     <p>&copy; {year} LU-City Entwicklungs-GmbH (LCE)</p>
     <ul class="site-footer__legal">
-      <li><a href="/impressum">Impressum</a></li>
-      <li><a href="/datenschutz">Datenschutzerklärung</a></li>
+      <li><a href={withBase("/impressum")}>Impressum</a></li>
+      <li><a href={withBase("/datenschutz")}>Datenschutzerklärung</a></li>
     </ul>
   </div>
 </footer>
