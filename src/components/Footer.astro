@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/images/Logo-LCE-2048-x-818-1.png";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/ueber-uns", label: "Über Uns" },
+  { href: "/zukunftsquartiere", label: "Zukunftsquartiere" },
+  { href: "/kontakt", label: "Kontakt" },
+];
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__top">
+    <a href="/" class="site-footer__logo" aria-label="LCE – Startseite">
+      <Image src={logo} alt="LCE Logo" width={140} height={56} />
+    </a>
+    <nav aria-label="Footer-Navigation">
+      <ul class="site-footer__nav">
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>&copy; {year} LU-City Entwicklungs-GmbH (LCE)</p>
+    <ul class="site-footer__legal">
+      <li><a href="/impressum">Impressum</a></li>
+      <li><a href="/datenschutz">Datenschutzerklärung</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: var(--section-space);
+  }
+  .site-footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .site-footer__logo img {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+  .site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-footer__nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .site-footer__nav a:hover {
+    text-decoration: underline;
+  }
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .site-footer__bottom p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .site-footer__legal {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-footer__legal a {
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>

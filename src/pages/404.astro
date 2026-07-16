@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Seite nicht gefunden"
+  description="Die gesuchte Seite konnte nicht gefunden werden."
+  noindex
+>
+  <section class="section center">
+    <div class="container" style="max-width: 520px;">
+      <p class="eyebrow">Fehler 404</p>
+      <h1>Seite nicht gefunden</h1>
+      <p>
+        Die von Ihnen aufgerufene Seite existiert nicht oder wurde verschoben. Nutzen Sie
+        die Navigation oder einen der folgenden Links, um weiterzukommen.
+      </p>
+      <div class="hero__actions" style="justify-content: center; display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="/" class="btn btn-primary">Zur Startseite</a>
+        <a href="/kontakt" class="btn btn-secondary btn-on-light">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

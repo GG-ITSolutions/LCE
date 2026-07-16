@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Datenschutzerklärung"
+  description="Datenschutzerklärung der LU-City Entwicklungs-GmbH (LCE) zur Verarbeitung personenbezogener Daten auf dieser Website."
+>
+  <section class="section">
+    <div class="container legal">
+      <h1>Datenschutzerklärung</h1>
+
+      <div class="legal__notice">
+        <strong>Hinweis für die Redaktion:</strong> Diese Seite fehlte im ursprünglichen
+        Konzept vollständig, ist aber nach der DSGVO zwingend erforderlich. Der folgende Text
+        ist ein Gerüst auf Basis der tatsächlich verwendeten Technik (Kontaktformular,
+        Hosting) und muss vor Veröffentlichung durch eine:n Jurist:in geprüft und um die
+        markierten Angaben ergänzt werden – insbesondere zum Hosting-Anbieter und einer ggf.
+        vorhandenen Datenschutzbeauftragten Person.
+      </div>
+
+      <h2>1. Verantwortlicher</h2>
+      <p>
+        Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br />
+        LU-City Entwicklungs-GmbH (LCE)<br />
+        Mundenheimer Str. 182, 67061 Ludwigshafen am Rhein<br />
+        E-Mail: <a href="mailto:info@lce-ludwigshafen.de">info@lce-ludwigshafen.de</a><br />
+        Telefon: +49 (621) 5604-148
+      </p>
+      <p>Datenschutzbeauftragte:r: [BITTE ERGÄNZEN, falls vorhanden]</p>
+
+      <h2>2. Hosting und Server-Logfiles</h2>
+      <p>
+        Diese Website wird bei [BITTE ERGÄNZEN: Hosting-Anbieter, z. B. TWL] gehostet. Beim
+        Aufruf der Website erhebt der Hosting-Anbieter automatisch Informationen in
+        sogenannten Server-Logfiles, die Ihr Browser automatisch übermittelt (z. B.
+        IP-Adresse, Datum und Uhrzeit der Anfrage, übertragene Datenmenge, Browsertyp und
+        -version, verwendetes Betriebssystem). Diese Daten dienen ausschließlich dem
+        sicheren und stabilen Betrieb der Website (Art. 6 Abs. 1 lit. f DSGVO) und werden
+        nicht mit anderen Datenquellen zusammengeführt.
+      </p>
+
+      <h2>3. Kontaktformular</h2>
+      <p>
+        Wenn Sie uns über das Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben
+        aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks
+        Bearbeitung der Anfrage und für den Fall von Anschlussfragen verarbeitet
+        (Art. 6 Abs. 1 lit. b DSGVO). Die Übermittlung erfolgt verschlüsselt an unser
+        internes Formular-Postfach. Ein zusätzliches, für Sie nicht sichtbares Feld dient
+        ausschließlich der automatisierten Erkennung von Spam-Zusendungen (sogenannte
+        „Honeypot"-Methode) und wird nicht ausgewertet, wenn Sie das Formular regulär
+        ausfüllen.
+      </p>
+      <p>Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+
+      <h2>4. Speicherdauer</h2>
+      <p>
+        Die im Rahmen einer Kontaktaufnahme übermittelten Daten werden gelöscht, sobald sie
+        für die Bearbeitung Ihrer Anfrage nicht mehr erforderlich sind, sofern keine
+        gesetzlichen Aufbewahrungspflichten entgegenstehen.
+      </p>
+
+      <h2>5. Cookies und Analyse-Tools</h2>
+      <p>
+        Diese Website verwendet aktuell keine Cookies zu Analyse- oder Marketingzwecken und
+        keine Drittanbieter-Analysewerkzeuge. Sollte sich dies ändern, wird diese
+        Datenschutzerklärung entsprechend angepasst.
+      </p>
+
+      <h2>6. Ihre Rechte</h2>
+      <p>
+        Sie haben jederzeit das Recht auf Auskunft über Ihre bei uns gespeicherten
+        personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der
+        Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser
+        Daten. Zudem steht Ihnen ein Recht auf Einschränkung der Verarbeitung sowie ein
+        Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu. Für Rückfragen zu Ihren
+        Rechten und weiteren Fragen zum Datenschutz können Sie sich jederzeit unter der oben
+        genannten E-Mail-Adresse an uns wenden.
+      </p>
+
+      <h2>7. Zuständige Aufsichtsbehörde</h2>
+      <p>
+        [BITTE ERGÄNZEN: Der Landesbeauftragte für den Datenschutz und die
+        Informationsfreiheit Rheinland-Pfalz oder die zuständige Aufsichtsbehörde]
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    max-width: 760px;
+  }
+  .legal h2 {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+  }
+  .legal__notice {
+    background: #fff6e0;
+    border: 1px solid #e8cf8a;
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+</style>

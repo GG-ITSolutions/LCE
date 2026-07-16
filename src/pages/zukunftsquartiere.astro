@@ -1,0 +1,464 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import karteImage from "../assets/images/67c59b1209c3d1134e556e13_Karte.avif";
+import blobA from "../assets/images/blob-brix-templates.svg";
+import wohnenIcon from "../assets/images/Wohnen.avif";
+import arbeitenIcon from "../assets/images/Arbeiten.avif";
+import bildungIcon from "../assets/images/Bildung.avif";
+import mobilitaetIcon from "../assets/images/Mobilitaet.avif";
+import iconZentral from "../assets/images/2_1.png";
+import iconMetropol from "../assets/images/3_1.png";
+import iconAnbindung from "../assets/images/4_1.png";
+import iconChance from "../assets/images/5.png";
+import workshopPhoto from "../assets/images/685ab12490a014f4b5368d1d__3MH8034.jpg";
+import adeptRendering from "../assets/images/Design-ohne-Titel-36.png";
+
+const bausteine = [
+  { icon: wohnenIcon, title: "Wohnen" },
+  { icon: arbeitenIcon, title: "Arbeiten" },
+  { icon: bildungIcon, title: "Bildung" },
+  { icon: mobilitaetIcon, title: "Mobilität" },
+];
+
+const standortvorteile = [
+  {
+    icon: iconZentral,
+    title: "Zentrale Lage",
+    text: "Die Lage im Stadtgebiet Ludwigshafens schafft unmittelbare Nähe zu bestehenden urbanen Strukturen und zentralen Innenstadtbereichen.",
+  },
+  {
+    icon: iconMetropol,
+    title: "Lage im Herzen der Metropolregion",
+    text: "Die Einbindung in das Zentrum der Metropolregion Rhein-Neckar bildet den funktionalen und wirtschaftlichen Kontext des Standorts und stärkt seine regionale Verflechtung.",
+  },
+  {
+    icon: iconAnbindung,
+    title: "Starke Anbindung",
+    text: "Die Anbindung an überregionale Verkehrsnetze schafft attraktive Voraussetzungen für eine vielfältige Nutzung und nachhaltige Wertentwicklung.",
+  },
+  {
+    icon: iconChance,
+    title: "Seltene Entwicklungschance",
+    text: "Die Flächen bieten die seltene Möglichkeit, innerstädtische Entwicklungsräume in dieser Größenordnung neu zu gestalten und langfristig zu positionieren.",
+  },
+];
+
+const downloads = [
+  {
+    category: "Dokumentationen",
+    items: [
+      {
+        title: "Abschlussdokumentation Werkstattverfahren",
+        text: "Eine umfassende Dokumentation zum Werkstattverfahren – mit allen Planungsentwürfen und Hintergrundinformationen rund um das Verfahren.",
+        href: "/documents/Abschlussdokumentation_Werkstattverfahren.pdf",
+      },
+      {
+        title: "Dokumentation Online-Dialog Werkstattverfahren",
+        text: "Eine detaillierte Auswertung eines Online-Beteiligungsformats im Vorfeld des Werkstattverfahrens.",
+        href: "/documents/dokumentation_onlinedialog_neues_stadtquartier.pdf",
+      },
+    ],
+  },
+  {
+    category: "Präsentationen",
+    items: [
+      {
+        title: "Abschlusspräsentation ADEPT Werkstattverfahren",
+        text: "Die beim Werkstattverfahren gezeigte finale Präsentation zum Zielkonzept des Teams ADEPT.",
+        href: "/documents/01_LU_LCE_ASW_ADEPT-2.pdf",
+      },
+      {
+        title: "Präsentation Stadtrat am 22.09.2025",
+        text: "Die in der Stadtratssitzung am 22.09.2025 gezeigte Rahmenpräsentation zur Vorstellung der Ergebnisse des Werkstattverfahrens.",
+        href: "/documents/Praesentation-Stadtrat_inkl_ADEPT.pdf",
+      },
+    ],
+  },
+  {
+    category: "Pressemitteilungen",
+    items: [
+      {
+        title: "Pressemeldung Werkstattverfahren",
+        text: "Pressemeldung zur Auftaktwerkstatt am 12.09.2024. Mit dieser Auftaktveranstaltung begann das rund viermonatige Werkstattverfahren.",
+        href: "/documents/pressemeldung_werkstattverfahren_neues_stadtquartier.pdf",
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Zukunftsquartiere an der Helmut-Kohl-Allee"
+  description="Die Zukunftsquartiere rund um die geplante Helmut-Kohl-Allee zählen zu den bedeutendsten Stadtentwicklungsprojekten in Ludwigshafen und der Metropolregion Rhein-Neckar."
+>
+  <section class="section hero">
+    <div class="container hero__grid">
+      <div>
+        <h1>Zukunftsquartiere rund um die Helmut-Kohl-Allee</h1>
+        <p class="hero__lead">
+          Die Zukunftsquartiere rund um die geplante Helmut-Kohl-Allee zählen zu den
+          bedeutendsten Stadtentwicklungsprojekten in Ludwigshafen und der Metropolregion
+          Rhein-Neckar. Entlang einer der wichtigsten Verkehrsachsen der Region entstehen neue
+          urbane Räume mit hoher städtebaulicher, wirtschaftlicher und gesellschaftlicher
+          Relevanz.
+        </p>
+        <div class="hero__actions">
+          <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
+          <a href="/ueber-uns" class="btn btn-secondary btn-on-light">Über die LCE</a>
+        </div>
+      </div>
+      <figure class="hero__figure">
+        <Image src={karteImage} alt="Stadtgrundkarte der Zukunftsquartiere an der Helmut-Kohl-Allee" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+        <figcaption>Stadtgrundkarte – Stadtverwaltung Ludwigshafen am Rhein</figcaption>
+      </figure>
+    </div>
+    <Image src={blobA} alt="" aria-hidden="true" class="hero__blob" />
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="center" style="max-width: 780px; margin-inline: auto;">
+        <h2>Projektüberblick</h2>
+        <p>
+          Mit den Zukunftsquartieren werden zentrale innerstädtische Flächen neu geordnet und
+          langfristig entwickelt. Ziel ist es, leistungsfähige und zukunftsorientierte
+          Quartiere zu schaffen, die Wohnen, Arbeiten, Bildung, Mobilität und Freiräume in
+          einem integrierten Ansatz verbinden.
+        </p>
+        <p>
+          Die Lage entlang der Helmut-Kohl-Allee bietet dabei besondere Potenziale: Als
+          zentrale Verkehrsachse der Metropolregion Rhein-Neckar schafft sie neue
+          Sichtbarkeit, Erreichbarkeit und wirtschaftliche Perspektiven. Gleichzeitig
+          ermöglichen die Quartiere eine stärkere Vernetzung der nördlichen und südlichen
+          Innenstadtbereiche. Durch die Erweiterung des Friedensparks wird zudem die
+          bestehende Frischluftschneise ausgebaut und ein wichtiger Beitrag zur klimatischen
+          und freiräumlichen Qualität der Innenstadt geleistet.
+        </p>
+      </div>
+
+      <div class="grid grid-4 bausteine">
+        {
+          bausteine.map((item) => (
+            <div class="bausteine__item">
+              <Image src={item.icon} alt="" aria-hidden="true" width={64} height={64} />
+              <h3>{item.title}</h3>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="center" style="max-width: 680px; margin-inline: auto; margin-bottom: 2.5rem;">
+        <h2>Standortvorteile</h2>
+        <p>
+          Die Zukunftsquartiere verfügen über einen Standort mit besonderen
+          Entwicklungschancen: zentral in Ludwigshafen am Rhein gelegen und im Herzen der
+          Metropolregion Rhein-Neckar verankert.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {
+          standortvorteile.map((item) => (
+            <div class="card standort-card">
+              <Image src={item.icon} alt="" aria-hidden="true" width={56} height={56} />
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="center" style="max-width: 640px; margin-inline: auto; margin-bottom: 2.5rem;">
+        <p class="eyebrow">Wie geht es weiter?</p>
+        <h2>Planungsstand und Zeithorizont</h2>
+      </div>
+
+      <div class="planungsstand">
+        <div class="planungsstand__row">
+          <p>
+            Die Entwicklung der Zukunftsquartiere erfolgt schrittweise und ist eng an den
+            Rückbau der Hochstraße Nord sowie den Neubau der Helmut-Kohl-Allee gekoppelt.
+            <strong> Die Fertigstellung der Helmut-Kohl-Allee ist derzeit für das Jahr 2032
+            vorgesehen.</strong>
+          </p>
+          <p>
+            Ein wichtiger Meilenstein war das Werkstattverfahren, dessen Ergebnisse derzeit
+            in eine Rahmenplanung überführt werden. Diese Rahmenplanung definiert
+            übergeordnete Zielsetzungen, städtebauliche Leitlinien und
+            Entwicklungsperspektiven für die einzelnen Quartiere.
+          </p>
+          <figure class="planungsstand__figure">
+            <Image src={workshopPhoto} alt="Werkstattverfahren: Planungsteams und LCE im Austausch zu den Zukunftsquartieren" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+          </figure>
+        </div>
+
+        <div class="planungsstand__row planungsstand__row--reverse">
+          <figure class="planungsstand__figure">
+            <Image src={adeptRendering} alt="3D-Visualisierung des Zielkonzepts von ADEPT für die Zukunftsquartiere" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+            <figcaption>ADEPT, 2026</figcaption>
+          </figure>
+          <p>
+            In den kommenden Schritten erfolgt die weitere Ausarbeitung der Rahmenplanung
+            sowie die Schaffung von Baurecht im Rahmen der Bauleitplanung, insbesondere durch
+            Flächennutzungs- und Bebauungspläne. Entsprechende politische Beschlüsse sind
+            Bestandteil des weiteren Prozesses.
+          </p>
+          <p>
+            Einzelne Entwicklungsbereiche stehen dabei zu unterschiedlichen Zeitpunkten zur
+            Verfügung. Zu den frühzeitig entwickelbaren Flächen zählen unter anderem das
+            Areal Spedition Frey / Deutsche Straße, das ehemalige Rathausgelände sowie
+            Flächen östlich der Kreisverwaltung (Ellipsengrundstück). Nachrangig entwickelt
+            werden unter anderem das Benckiserareal sowie der Bereich des Friedensparks, der
+            primär freiraumorientiert geprägt ist.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div style="max-width: 720px;">
+        <p class="eyebrow">Projekt Zukunftsquartiere</p>
+        <h2>Downloads &amp; Infomaterial</h2>
+        <p>
+          In unserem Download-Bereich finden Sie alle wichtigen Informationen, Präsentationen
+          und Unterlagen zum Projekt „Zukunftsquartiere" gebündelt an einem Ort.
+        </p>
+      </div>
+
+      <div class="downloads">
+        {
+          downloads.map((group, index) => (
+            <div class="downloads__group">
+              <button
+                class="downloads__toggle"
+                type="button"
+                aria-expanded={index === 0 ? "true" : "false"}
+                aria-controls={`downloads-panel-${index}`}
+              >
+                <h3>{group.category}</h3>
+                <span aria-hidden="true" class="downloads__icon"></span>
+              </button>
+              <div id={`downloads-panel-${index}`} class="downloads__panel" hidden={index !== 0}>
+                {group.items.map((item) => (
+                  <div class="downloads__item">
+                    <div class="downloads__item-header">
+                      <strong>{item.title}</strong>
+                      <a href={item.href} class="downloads__link">Herunterladen</a>
+                    </div>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero__lead {
+    font-size: 1.1rem;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .hero__figure {
+    margin: 0;
+  }
+  .hero__figure :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+  .hero__figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+  .hero__blob {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 500px;
+    opacity: 0.12;
+    z-index: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .bausteine {
+    margin-top: 3rem;
+  }
+  .bausteine__item {
+    text-align: center;
+  }
+  .bausteine__item img {
+    margin-inline: auto;
+    margin-bottom: 1rem;
+  }
+
+  .standort-card {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .standort-card img {
+    flex-shrink: 0;
+  }
+  .standort-card h3 {
+    margin-bottom: 0.4rem;
+  }
+
+  .planungsstand__row {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .planungsstand__row--reverse {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+  .planungsstand__row--reverse .planungsstand__figure {
+    order: -1;
+  }
+  .planungsstand__figure {
+    margin: 0;
+  }
+  .planungsstand__figure :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+  .planungsstand__figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 760px) {
+    .planungsstand__row,
+    .planungsstand__row--reverse {
+      grid-template-columns: 1fr;
+    }
+    .planungsstand__row--reverse .planungsstand__figure {
+      order: initial;
+    }
+  }
+
+  .downloads {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .downloads__group {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .downloads__toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    text-align: left;
+  }
+  .downloads__toggle h3 {
+    margin: 0;
+  }
+  .downloads__icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .downloads__icon::before,
+  .downloads__icon::after {
+    content: "";
+    position: absolute;
+    background: var(--color-secondary);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .downloads__icon::before {
+    width: 14px;
+    height: 2px;
+  }
+  .downloads__icon::after {
+    width: 2px;
+    height: 14px;
+    transition: transform 0.15s ease;
+  }
+  .downloads__toggle[aria-expanded="true"] .downloads__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .downloads__panel {
+    padding-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .downloads__item-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.3rem;
+  }
+  .downloads__link {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-primary-dark);
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".downloads__toggle").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const panel = document.getElementById(toggle.getAttribute("aria-controls") ?? "");
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+      panel?.toggleAttribute("hidden", isOpen);
+    });
+  });
+</script>

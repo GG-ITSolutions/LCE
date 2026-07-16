@@ -1,0 +1,274 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/Design-ohne-Titel-36.png";
+import glow from "../assets/images/Glow2.png";
+import teamImage from "../assets/images/Design-ohne-Titel-18.png";
+import karteImage from "../assets/images/67c59b1209c3d1134e556e13_Karte.avif";
+import patternA from "../assets/images/pattern-cta-v12-brix-templates-01.svg";
+import patternB from "../assets/images/pattern-cta-v3-brix-templates-01.svg";
+
+const kennzahlen = [
+  {
+    value: "39 ha",
+    label: "Entwicklungsfläche",
+    text: "Die Zukunftsquartiere erstrecken sich über mehrere Entwicklungsbereiche im Kerngebiet Ludwigshafens und umfassen insgesamt eine Fläche von rund 39 Hektar.",
+  },
+  {
+    value: "4 Bausteine",
+    label: "Quartierstruktur",
+    text: "Die vier zentralen Bausteine Wohnen, Arbeiten, Bildung und Mobilität bilden die konzeptionelle Grundlage der Quartiere und sorgen für eine langfristig tragfähige Nutzungsstruktur.",
+  },
+  {
+    value: "2032",
+    label: "Zeithorizont",
+    text: "Die Quartiersentwicklung erfolgt etappenweise, gekoppelt an Rückbau und Neubau zentraler Verkehrsstrukturen – mit Zieljahr 2032 für die Fertigstellung der Helmut-Kohl-Allee.",
+  },
+  {
+    value: "Mehrere Baufelder",
+    label: "Entwicklungsperspektiven",
+    text: "Durch die strategische Lage und Größe des Entwicklungsgebiets entstehen vielfältige Potenziale für unterschiedliche Nutzungs- und Entwicklungsansätze.",
+  },
+];
+---
+
+<BaseLayout
+  title="LCE – für Wohnen, Wirtschaft und Innovation in Ludwigshafen"
+  description="Die LCE ist die kommunale Entwicklungsgesellschaft der Stadt Ludwigshafen und der GAG. Wir entwickeln die Zukunftsquartiere an der Helmut-Kohl-Allee – transparent und planungssicher."
+>
+  <section class="section hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <p class="eyebrow">Kommunale Entwicklungsgesellschaft</p>
+        <h1>LCE – für Wohnen, Wirtschaft und Innovation in Ludwigshafen.</h1>
+        <p class="hero__lead">
+          Als kommunale Entwicklungsgesellschaft schaffen wir die Grundlagen für die neuen
+          Stadtquartiere – Schritt für Schritt, transparent und planungssicher.
+        </p>
+        <div class="hero__actions">
+          <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
+          <a href="/ueber-uns" class="btn btn-secondary btn-on-light">Über die LCE</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <Image src={glow} alt="" aria-hidden="true" class="hero__glow" widths={[430, 860]} sizes="(max-width: 860px) 60vw, 430px" />
+        <Image
+          src={heroImage}
+          alt="3D-Visualisierung der geplanten Zukunftsquartiere entlang der Helmut-Kohl-Allee (Konzept ADEPT)"
+          class="hero__image"
+          widths={[500, 800, 1080, 1600]}
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 620px"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container overview">
+      <div class="center overview__intro">
+        <p class="eyebrow">Wer wir sind</p>
+        <h2>Die LCE auf einen Blick</h2>
+      </div>
+
+      <div class="overview__row">
+        <div class="overview__text">
+          <h3>Gemeinsame Gesellschaft der Stadt &amp; GAG</h3>
+          <p>
+            Die LCE ist eine gemeinsame Tochter der Stadt Ludwigshafen und der GAG Ludwigshafen.
+            Im Mittelpunkt steht die Transformation zentraler Stadtbereiche – insbesondere die
+            neuen Stadtquartiere an der geplanten Helmut-Kohl-Allee. Als kommunale
+            Entwicklungsgesellschaft bündelt die LCE Expertise aus Stadtplanung,
+            Projektsteuerung und Wirtschaft, um zukunftsfähige und nachhaltige Quartiere zu
+            realisieren.
+          </p>
+          <a href="/ueber-uns" class="overview__link">Mehr über uns →</a>
+        </div>
+        <div class="overview__image">
+          <Image src={teamImage} alt="Das LCE-Team bespricht das Städtebaumodell der Zukunftsquartiere" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+        </div>
+      </div>
+
+      <div class="overview__row overview__row--reverse">
+        <div class="overview__image">
+          <Image src={karteImage} alt="Stadtgrundkarte der Zukunftsquartiere an der Helmut-Kohl-Allee (Quelle: Stadtverwaltung Ludwigshafen am Rhein)" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+        </div>
+        <div class="overview__text">
+          <h3>Zukunftsquartiere an der Helmut-Kohl-Allee</h3>
+          <p>
+            Eines der größten städtebaulichen Projekte Deutschlands: Die Zukunftsquartiere
+            werden von der LCE im Auftrag der Stadtentwicklung vorangetrieben. Ziel sind
+            innovative und nachhaltige Quartiere, die ökonomischen, ökologischen und sozialen
+            Herausforderungen gerecht werden.
+          </p>
+          <a href="/zukunftsquartiere" class="overview__link">Mehr zu den Zukunftsquartieren →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="center" style="max-width: 640px; margin-inline: auto;">
+        <p class="eyebrow">Zukunftsquartiere</p>
+        <h2>Die wichtigsten Kennzahlen auf einen Blick</h2>
+      </div>
+      <div class="grid grid-4 kennzahlen">
+        {
+          kennzahlen.map((item) => (
+            <div class="card kennzahlen__card">
+              <div class="kennzahlen__value">{item.value}</div>
+              <div class="kennzahlen__label">{item.label}</div>
+              <p>{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-card">
+        <Image src={patternA} alt="" aria-hidden="true" class="cta-card__pattern cta-card__pattern--a" />
+        <Image src={patternB} alt="" aria-hidden="true" class="cta-card__pattern cta-card__pattern--b" />
+        <h2>Sie interessieren sich für Entwicklungspotenziale der Zukunftsquartiere? Sprechen Sie uns an!</h2>
+        <a href="/kontakt" class="btn btn-primary">Kontakt für Investoren</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+  }
+  .hero__lead {
+    font-size: 1.15rem;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .hero__visual {
+    position: relative;
+  }
+  .hero__glow {
+    position: absolute;
+    inset: -10% -10% auto auto;
+    width: 60%;
+    z-index: 0;
+    opacity: 0.7;
+  }
+  .hero__image {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .hero__visual {
+      order: -1;
+    }
+  }
+
+  .overview__intro {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .overview__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .overview__row:last-child {
+    margin-bottom: 0;
+  }
+  .overview__image :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+  .overview__link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-primary-dark);
+  }
+  @media (max-width: 760px) {
+    .overview__row,
+    .overview__row--reverse {
+      grid-template-columns: 1fr;
+    }
+    .overview__row--reverse .overview__image {
+      order: -1;
+    }
+  }
+
+  .kennzahlen {
+    margin-top: 2.5rem;
+  }
+  .kennzahlen__value {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+    color: var(--color-primary-dark);
+  }
+  .kennzahlen__label {
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-secondary);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .cta-card h2 {
+    color: #fff;
+    max-width: 40ch;
+    margin: 0;
+  }
+  .cta-card__pattern {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .cta-card__pattern--a {
+    top: -20%;
+    right: -10%;
+    width: 260px;
+  }
+  .cta-card__pattern--b {
+    bottom: -30%;
+    left: -10%;
+    width: 220px;
+  }
+  .cta-card > :global(*:not(.cta-card__pattern)) {
+    position: relative;
+    z-index: 1;
+  }
+</style>

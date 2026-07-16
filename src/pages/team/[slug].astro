@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const team = await getCollection("team", ({ data }) => data.hasProfile);
+  return team.map((member) => ({
+    params: { slug: member.slug },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props;
+const { Content } = await render(member);
+---
+
+<BaseLayout
+  title={member.data.name}
+  description={`${member.data.name} – ${member.data.role} bei der LCE. Kontakt und Ansprechpartner:in für die Zukunftsquartiere in Ludwigshafen.`}
+>
+  <section class="section profile">
+    <div class="container profile__grid">
+      <div class="profile__image">
+        <Image src={member.data.image} alt={member.data.name} width={320} height={320} />
+      </div>
+      <div>
+        <p class="eyebrow">{member.data.department}</p>
+        <h1>{member.data.name}</h1>
+        <p class="profile__role">{member.data.role}</p>
+        <div class="profile__bio">
+          <Content />
+        </div>
+        <a href={`mailto:${member.data.email}`} class="btn btn-primary">{member.data.email}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .profile__grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+  .profile__image :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    aspect-ratio: 1;
+    object-fit: cover;
+    width: 100%;
+  }
+  .profile__role {
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+  }
+  .profile__bio {
+    margin-bottom: 2rem;
+  }
+  .profile__bio :global(blockquote) {
+    background: var(--color-bg-muted);
+    border-left: 4px solid var(--color-primary);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+  }
+  @media (max-width: 700px) {
+    .profile__grid {
+      grid-template-columns: 1fr;
+    }
+    .profile__image {
+      max-width: 220px;
+    }
+  }
+</style>
