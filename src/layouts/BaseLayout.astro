@@ -62,5 +62,44 @@ const organizationSchema = {
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Shared accordion behaviour (Downloads, FAQ) – all collapsed by default,
+      // CSS animates the open/close via grid-template-rows. `inert` keeps the
+      // collapsed content out of tab order and the accessibility tree.
+      const items = document.querySelectorAll<HTMLElement>(".accordion__item");
+      items.forEach((item) => {
+        const trigger = item.querySelector<HTMLButtonElement>(".accordion__trigger");
+        const panelInner = item.querySelector<HTMLElement>(".accordion__panel-inner");
+        if (!trigger) return;
+        trigger.setAttribute("aria-expanded", "false");
+        if (panelInner) panelInner.inert = true;
+        trigger.addEventListener("click", () => {
+          const open = item.classList.toggle("is-open");
+          trigger.setAttribute("aria-expanded", String(open));
+          if (panelInner) panelInner.inert = !open;
+        });
+      });
+
+      // Gentle reveal for elements marked data-reveal, respecting reduced motion.
+      const reveals = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced || !("IntersectionObserver" in window)) {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px" }
+        );
+        reveals.forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>

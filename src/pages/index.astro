@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import heroImage from "../assets/images/Design-ohne-Titel-36.png";
@@ -65,12 +66,9 @@ const kennzahlen = [
 
   <section class="section section-muted">
     <div class="container overview">
-      <div class="center overview__intro">
-        <p class="eyebrow">Wer wir sind</p>
-        <h2>Die LCE auf einen Blick</h2>
-      </div>
+      <SectionHeader eyebrow="Wer wir sind" title="Die LCE auf einen Blick" class="overview__intro" />
 
-      <div class="overview__row">
+      <div class="overview__row" data-reveal>
         <div class="overview__text">
           <h3>Gemeinsame Gesellschaft der Stadt &amp; GAG</h3>
           <p>
@@ -88,7 +86,7 @@ const kennzahlen = [
         </div>
       </div>
 
-      <div class="overview__row overview__row--reverse">
+      <div class="overview__row overview__row--reverse" data-reveal>
         <div class="overview__image">
           <Image src={karteImage} alt="Stadtgrundkarte der Zukunftsquartiere an der Helmut-Kohl-Allee (Quelle: Stadtverwaltung Ludwigshafen am Rhein)" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
         </div>
@@ -106,12 +104,9 @@ const kennzahlen = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-reveal>
     <div class="container">
-      <div class="center" style="max-width: 640px; margin-inline: auto;">
-        <p class="eyebrow">Zukunftsquartiere</p>
-        <h2>Die wichtigsten Kennzahlen auf einen Blick</h2>
-      </div>
+      <SectionHeader eyebrow="Zukunftsquartiere" title="Die wichtigsten Kennzahlen auf einen Blick" />
       <div class="grid grid-4 kennzahlen">
         {
           kennzahlen.map((item) => (

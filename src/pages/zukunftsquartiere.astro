@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import karteImage from "../assets/images/67c59b1209c3d1134e556e13_Karte.avif";
@@ -7,38 +8,46 @@ import wohnenIcon from "../assets/images/Wohnen.avif";
 import arbeitenIcon from "../assets/images/Arbeiten.avif";
 import bildungIcon from "../assets/images/Bildung.avif";
 import mobilitaetIcon from "../assets/images/Mobilitaet.avif";
-import iconZentral from "../assets/images/2_1.png";
-import iconMetropol from "../assets/images/3_1.png";
-import iconAnbindung from "../assets/images/4_1.png";
-import iconChance from "../assets/images/5.png";
 import workshopPhoto from "../assets/images/685ab12490a014f4b5368d1d__3MH8034.jpg";
 import adeptRendering from "../assets/images/Design-ohne-Titel-36.png";
 
 const bausteine = [
-  { icon: wohnenIcon, title: "Wohnen" },
-  { icon: arbeitenIcon, title: "Arbeiten" },
-  { icon: bildungIcon, title: "Bildung" },
-  { icon: mobilitaetIcon, title: "Mobilität" },
+  {
+    icon: wohnenIcon,
+    title: "Wohnen",
+    text: "Neue, vielfältige Wohnangebote für unterschiedliche Bedarfe – urban, durchmischt und gut angebunden.",
+  },
+  {
+    icon: arbeitenIcon,
+    title: "Arbeiten",
+    text: "Flächen für Gewerbe, Dienstleistung und Innovation, die wirtschaftliche Perspektiven im Quartier schaffen.",
+  },
+  {
+    icon: bildungIcon,
+    title: "Bildung",
+    text: "Räume für Bildung und Begegnung als soziale Infrastruktur eines lebendigen Stadtquartiers.",
+  },
+  {
+    icon: mobilitaetIcon,
+    title: "Mobilität",
+    text: "Eine zukunftsfähige, vernetzte Mobilität entlang der neuen Helmut-Kohl-Allee.",
+  },
 ];
 
 const standortvorteile = [
   {
-    icon: iconZentral,
     title: "Zentrale Lage",
     text: "Die Lage im Stadtgebiet Ludwigshafens schafft unmittelbare Nähe zu bestehenden urbanen Strukturen und zentralen Innenstadtbereichen.",
   },
   {
-    icon: iconMetropol,
     title: "Lage im Herzen der Metropolregion",
     text: "Die Einbindung in das Zentrum der Metropolregion Rhein-Neckar bildet den funktionalen und wirtschaftlichen Kontext des Standorts und stärkt seine regionale Verflechtung.",
   },
   {
-    icon: iconAnbindung,
     title: "Starke Anbindung",
     text: "Die Anbindung an überregionale Verkehrsnetze schafft attraktive Voraussetzungen für eine vielfältige Nutzung und nachhaltige Wertentwicklung.",
   },
   {
-    icon: iconChance,
     title: "Seltene Entwicklungschance",
     text: "Die Flächen bieten die seltene Möglichkeit, innerstädtische Entwicklungsräume in dieser Größenordnung neu zu gestalten und langfristig zu positionieren.",
   },
@@ -115,55 +124,52 @@ const downloads = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-reveal>
     <div class="container">
-      <div class="center" style="max-width: 780px; margin-inline: auto;">
-        <h2>Projektüberblick</h2>
-        <p>
+      <SectionHeader eyebrow="Projektüberblick" title="Ein Quartier aus vier Bausteinen">
+        <p class="lead">
           Mit den Zukunftsquartieren werden zentrale innerstädtische Flächen neu geordnet und
-          langfristig entwickelt. Ziel ist es, leistungsfähige und zukunftsorientierte
-          Quartiere zu schaffen, die Wohnen, Arbeiten, Bildung, Mobilität und Freiräume in
-          einem integrierten Ansatz verbinden.
+          langfristig entwickelt: leistungsfähige, zukunftsorientierte Quartiere, die Wohnen,
+          Arbeiten, Bildung, Mobilität und Freiräume in einem integrierten Ansatz verbinden.
         </p>
-        <p>
-          Die Lage entlang der Helmut-Kohl-Allee bietet dabei besondere Potenziale: Als
-          zentrale Verkehrsachse der Metropolregion Rhein-Neckar schafft sie neue
-          Sichtbarkeit, Erreichbarkeit und wirtschaftliche Perspektiven. Gleichzeitig
-          ermöglichen die Quartiere eine stärkere Vernetzung der nördlichen und südlichen
-          Innenstadtbereiche. Durch die Erweiterung des Friedensparks wird zudem die
-          bestehende Frischluftschneise ausgebaut und ein wichtiger Beitrag zur klimatischen
-          und freiräumlichen Qualität der Innenstadt geleistet.
-        </p>
-      </div>
+      </SectionHeader>
 
       <div class="grid grid-4 bausteine">
         {
           bausteine.map((item) => (
-            <div class="bausteine__item">
+            <div class="card bausteine__item">
               <Image src={item.icon} alt="" aria-hidden="true" width={64} height={64} />
               <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </div>
           ))
         }
       </div>
+
+      <p class="bausteine__note">
+        Die Lage entlang der Helmut-Kohl-Allee bietet besondere Potenziale: Als zentrale
+        Verkehrsachse der Metropolregion Rhein-Neckar schafft sie neue Sichtbarkeit,
+        Erreichbarkeit und wirtschaftliche Perspektiven, vernetzt die nördliche und südliche
+        Innenstadt und stärkt über die Erweiterung des Friedensparks die klimatische und
+        freiräumliche Qualität der Innenstadt.
+      </p>
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-muted" data-reveal>
     <div class="container">
-      <div class="center" style="max-width: 680px; margin-inline: auto; margin-bottom: 2.5rem;">
-        <h2>Standortvorteile</h2>
-        <p>
+      <SectionHeader eyebrow="Standort" title="Standortvorteile">
+        <p class="lead">
           Die Zukunftsquartiere verfügen über einen Standort mit besonderen
           Entwicklungschancen: zentral in Ludwigshafen am Rhein gelegen und im Herzen der
           Metropolregion Rhein-Neckar verankert.
         </p>
-      </div>
+      </SectionHeader>
       <div class="grid grid-2">
         {
-          standortvorteile.map((item) => (
-            <div class="stat-tile standort-card">
-              <Image src={item.icon} alt="" aria-hidden="true" width={56} height={56} />
+          standortvorteile.map((item, index) => (
+            <div class="card standort-card">
+              <span class="standort-card__num">{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
@@ -175,21 +181,21 @@ const downloads = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-reveal>
     <div class="container">
-      <div class="center" style="max-width: 640px; margin-inline: auto; margin-bottom: 2.5rem;">
-        <p class="eyebrow">Wie geht es weiter?</p>
-        <h2>Planungsstand und Zeithorizont</h2>
+      <SectionHeader eyebrow="Wie geht es weiter?" title="Planungsstand und Zeithorizont" />
+
+      <div class="milestone">
+        <span class="milestone__year">2032</span>
+        <p>
+          Zieljahr für die Fertigstellung der Helmut-Kohl-Allee. Die Entwicklung der
+          Zukunftsquartiere erfolgt schrittweise und ist eng an den Rückbau der Hochstraße
+          Nord sowie den Neubau der Allee gekoppelt.
+        </p>
       </div>
 
       <div class="planungsstand">
         <div class="planungsstand__row">
-          <p>
-            Die Entwicklung der Zukunftsquartiere erfolgt schrittweise und ist eng an den
-            Rückbau der Hochstraße Nord sowie den Neubau der Helmut-Kohl-Allee gekoppelt.
-            <strong> Die Fertigstellung der Helmut-Kohl-Allee ist derzeit für das Jahr 2032
-            vorgesehen.</strong>
-          </p>
           <p>
             Ein wichtiger Meilenstein war das Werkstattverfahren, dessen Ergebnisse derzeit
             in eine Rahmenplanung überführt werden. Diese Rahmenplanung definiert
@@ -225,40 +231,39 @@ const downloads = [
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-muted" data-reveal>
     <div class="container">
-      <div style="max-width: 720px;">
-        <p class="eyebrow">Projekt Zukunftsquartiere</p>
-        <h2>Downloads &amp; Infomaterial</h2>
-        <p>
+      <SectionHeader eyebrow="Projekt Zukunftsquartiere" title="Downloads & Infomaterial" align="left">
+        <p class="lead">
           In unserem Download-Bereich finden Sie alle wichtigen Informationen, Präsentationen
           und Unterlagen zum Projekt „Zukunftsquartiere" gebündelt an einem Ort.
         </p>
-      </div>
+      </SectionHeader>
 
       <div class="downloads">
         {
           downloads.map((group, index) => (
-            <div class="downloads__group">
+            <div class="accordion__item">
               <button
-                class="downloads__toggle"
+                class="accordion__trigger"
                 type="button"
-                aria-expanded={index === 0 ? "true" : "false"}
                 aria-controls={`downloads-panel-${index}`}
               >
                 <h3>{group.category}</h3>
-                <span aria-hidden="true" class="downloads__icon"></span>
+                <span aria-hidden="true" class="accordion__icon"></span>
               </button>
-              <div id={`downloads-panel-${index}`} class="downloads__panel" hidden={index !== 0}>
-                {group.items.map((item) => (
-                  <div class="downloads__item">
-                    <div class="downloads__item-header">
-                      <strong>{item.title}</strong>
-                      <a href={item.href} class="downloads__link">Herunterladen</a>
+              <div id={`downloads-panel-${index}`} class="accordion__panel">
+                <div class="accordion__panel-inner">
+                  {group.items.map((item) => (
+                    <div class="downloads__item">
+                      <div class="downloads__item-header">
+                        <strong>{item.title}</strong>
+                        <a href={item.href} class="downloads__link">Herunterladen</a>
+                      </div>
+                      <p>{item.text}</p>
                     </div>
-                    <p>{item.text}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           ))
@@ -334,17 +339,55 @@ const downloads = [
     margin-inline: auto;
     margin-bottom: 1rem;
   }
+  .bausteine__item h3 {
+    margin-bottom: 0.5rem;
+  }
+  .bausteine__note {
+    max-width: 70ch;
+    margin: 2.5rem auto 0;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
 
   .standort-card {
     display: flex;
     gap: 1.25rem;
     align-items: flex-start;
   }
-  .standort-card img {
+  .standort-card__num {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--color-primary);
     flex-shrink: 0;
   }
   .standort-card h3 {
     margin-bottom: 0.4rem;
+  }
+
+  .milestone {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 3vw, 2.75rem);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .milestone__year {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(3rem, 2rem + 4vw, 5rem);
+    line-height: 1;
+    color: #fff;
+  }
+  .milestone p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    flex: 1 1 320px;
   }
 
   .planungsstand__row {
@@ -394,52 +437,7 @@ const downloads = [
     margin-top: 2rem;
     border-top: 1px solid var(--color-border);
   }
-  .downloads__group {
-    border-bottom: 1px solid var(--color-border);
-  }
-  .downloads__toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    border: none;
-    padding: 1.25rem 0;
-    cursor: pointer;
-    text-align: left;
-  }
-  .downloads__toggle h3 {
-    margin: 0;
-  }
-  .downloads__icon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .downloads__icon::before,
-  .downloads__icon::after {
-    content: "";
-    position: absolute;
-    background: var(--color-secondary);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .downloads__icon::before {
-    width: 14px;
-    height: 2px;
-  }
-  .downloads__icon::after {
-    width: 2px;
-    height: 14px;
-    transition: transform 0.15s ease;
-  }
-  .downloads__toggle[aria-expanded="true"] .downloads__icon::after {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-  .downloads__panel {
-    padding-bottom: 1.5rem;
+  .downloads__panel-inner {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -458,15 +456,7 @@ const downloads = [
     color: var(--color-highlight);
     white-space: nowrap;
   }
+  .downloads__link:hover {
+    text-decoration: underline;
+  }
 </style>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>(".downloads__toggle").forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const panel = document.getElementById(toggle.getAttribute("aria-controls") ?? "");
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      panel?.toggleAttribute("hidden", isOpen);
-    });
-  });
-</script>

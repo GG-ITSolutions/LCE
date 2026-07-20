@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
@@ -105,17 +106,18 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-reveal>
     <div class="container">
-      <h2>Wofür die LCE steht</h2>
-      <p class="lead">
-        Ein wesentlicher Aufgabenbereich der LCE ist die Vorbereitung städtebaulicher
-        Planungen. Dazu zählen die Beauftragung und Koordination von Untersuchungen,
-        Planungs- und Machbarkeitsstudien sowie die Steuerung komplexer Planungsverfahren.
-        Auch die Organisation von Mehrfachbeauftragungen, wie dem Werkstattverfahren zur
-        Erarbeitung eines Gesamtkonzepts für die Zukunftsquartiere, gehört zum
-        Leistungsumfang der LCE.
-      </p>
+      <SectionHeader eyebrow="Selbstverständnis" title="Wofür die LCE steht" align="left">
+        <p class="lead">
+          Ein wesentlicher Aufgabenbereich der LCE ist die Vorbereitung städtebaulicher
+          Planungen. Dazu zählen die Beauftragung und Koordination von Untersuchungen,
+          Planungs- und Machbarkeitsstudien sowie die Steuerung komplexer Planungsverfahren.
+          Auch die Organisation von Mehrfachbeauftragungen, wie dem Werkstattverfahren zur
+          Erarbeitung eines Gesamtkonzepts für die Zukunftsquartiere, gehört zum
+          Leistungsumfang der LCE.
+        </p>
+      </SectionHeader>
       <div class="grid grid-2 values">
         {
           values.map((value) => (
@@ -130,11 +132,9 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-muted" data-reveal>
     <div class="container">
-      <div class="center" style="margin-bottom: 2.5rem;">
-        <h2>Unsere Geschichte</h2>
-      </div>
+      <SectionHeader eyebrow="Historie" title="Unsere Geschichte" />
       <ol class="grid grid-3 timeline">
         {
           history.map((entry) => (
@@ -149,18 +149,17 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     </div>
   </section>
 
-  <section class="section" id="team">
+  <section class="section" id="team" data-reveal>
     <div class="container">
-      <div class="center" style="max-width: 640px; margin-inline: auto; margin-bottom: 2.5rem;">
-        <h2>Unser Team</h2>
-        <p>
+      <SectionHeader eyebrow="Menschen" title="Unser Team">
+        <p class="lead">
           Hinter der LCE steht ein engagiertes Team, das die Entwicklung der Zukunftsquartiere
           in Ludwigshafen verantwortungsvoll begleitet. Von der Geschäftsführung über die
           Projektentwicklung bis zu Marketing und Kommunikation arbeitet das Team eng
           zusammen.
         </p>
-      </div>
-      <div class="grid grid-3">
+      </SectionHeader>
+      <div class="card-grid team-grid">
         {
           team.map((member) => {
             const Wrapper = member.data.hasProfile ? "a" : "div";
@@ -339,12 +338,18 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     display: block;
     margin-bottom: 1rem;
     text-decoration: none;
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
   .team-card__image :global(img) {
     border-radius: var(--radius-md);
     aspect-ratio: 1;
     object-fit: cover;
     width: 100%;
+    transition: transform 0.35s ease;
+  }
+  a.team-card__image:hover :global(img) {
+    transform: scale(1.05);
   }
   .team-card__badge {
     position: absolute;

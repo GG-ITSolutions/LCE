@@ -6,13 +6,17 @@ import sourceLight from "../assets/fonts/SourceSansPro-Light.woff2?url";
 import sourceRegular from "../assets/fonts/SourceSansPro-Regular.woff2?url";
 import sourceBold from "../assets/fonts/SourceSansPro-Bold.woff2?url";
 
+// Generic family names ("LCE Display" / "LCE Text") decouple the typeface from
+// the rest of the codebase: to swap a font, replace the woff2 imports above and
+// the src URLs here — nothing else changes, because all styles use the
+// --font-heading / --font-body tokens in global.css, which point at these names.
 const fontFaceCss = `
-  @font-face { font-family: "DINOffc"; src: url("${dinLight}") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
-  @font-face { font-family: "DINOffc"; src: url("${dinRegular}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-  @font-face { font-family: "DINOffc"; src: url("${dinBold}") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-  @font-face { font-family: "SourceSansPro"; src: url("${sourceLight}") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
-  @font-face { font-family: "SourceSansPro"; src: url("${sourceRegular}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-  @font-face { font-family: "SourceSansPro"; src: url("${sourceBold}") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LCE Display"; src: url("${dinLight}") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LCE Display"; src: url("${dinRegular}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LCE Display"; src: url("${dinBold}") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LCE Text"; src: url("${sourceLight}") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LCE Text"; src: url("${sourceRegular}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "LCE Text"; src: url("${sourceBold}") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 `;
 ---
 

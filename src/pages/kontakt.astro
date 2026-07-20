@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { withBase } from "../lib/paths";
 import { Image } from "astro:assets";
 import iconMail from "../assets/images/1_2.png";
@@ -150,29 +151,29 @@ const faqs = [
 
   <section class="section section-muted">
     <div class="container">
-      <div class="center" style="max-width: 640px; margin-inline: auto; margin-bottom: 2.5rem;">
-        <h2>FAQ – Häufig gestellte Fragen</h2>
-        <p>
+      <SectionHeader title="FAQ – Häufig gestellte Fragen">
+        <p class="lead">
           Hier finden Sie Antworten auf häufig gestellte Fragen rund um unsere Projekte,
           Ziele und Kontaktmöglichkeiten. Unser Team steht Ihnen jederzeit zur Verfügung, um
           Fragen zu beantworten.
         </p>
-      </div>
+      </SectionHeader>
       <div class="faq" style="max-width: 820px; margin-inline: auto;">
         {
           faqs.map((faq, index) => (
-            <div class="faq__item">
+            <div class="accordion__item">
               <button
-                class="faq__toggle"
+                class="accordion__trigger"
                 type="button"
-                aria-expanded="false"
                 aria-controls={`faq-panel-${index}`}
               >
                 <h3>{faq.question}</h3>
-                <span aria-hidden="true" class="faq__icon" />
+                <span aria-hidden="true" class="accordion__icon" />
               </button>
-              <div id={`faq-panel-${index}`} class="faq__panel" hidden>
-                <p>{faq.answer}</p>
+              <div id={`faq-panel-${index}`} class="accordion__panel">
+                <div class="accordion__panel-inner">
+                  <p>{faq.answer}</p>
+                </div>
               </div>
             </div>
           ))
@@ -277,67 +278,10 @@ const faqs = [
     color: var(--color-secondary);
   }
 
-  .faq__item {
-    border-bottom: 1px solid var(--color-border);
-  }
-  .faq__toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    background: none;
-    border: none;
-    padding: 1.25rem 0;
-    cursor: pointer;
-    text-align: left;
-  }
-  .faq__toggle h3 {
-    margin: 0;
+  .faq .accordion__trigger h3 {
     font-size: 1.05rem;
   }
-  .faq__icon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .faq__icon::before,
-  .faq__icon::after {
-    content: "";
-    position: absolute;
-    background: var(--color-secondary);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .faq__icon::before {
-    width: 14px;
-    height: 2px;
-  }
-  .faq__icon::after {
-    width: 2px;
-    height: 14px;
-    transition: transform 0.15s ease;
-  }
-  .faq__toggle[aria-expanded="true"] .faq__icon::after {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-  .faq__panel {
-    padding-bottom: 1.5rem;
-  }
-  .faq__panel p {
+  .faq .accordion__panel-inner p {
     margin: 0;
   }
 </style>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>(".faq__toggle").forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const panel = document.getElementById(toggle.getAttribute("aria-controls") ?? "");
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      panel?.toggleAttribute("hidden", isOpen);
-    });
-  });
-</script>
