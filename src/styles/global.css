@@ -22,9 +22,9 @@
   --btn-primary-bg-hover: #616d24;
   --btn-primary-text: #ffffff;
 
-  /* Typography – swap a typeface in ONE place: replace the woff2 files and the
-     @font-face src in src/components/Fonts.astro. Everything references these tokens. */
-  --font-heading: "LCE Display", Arial, Helvetica, sans-serif;
+  /* Typography – Source Sans Pro throughout (headings + body). Swap a typeface in
+     ONE place: replace the woff2 files and @font-face src in src/components/Fonts.astro. */
+  --font-heading: "LCE Text", Arial, Helvetica, sans-serif;
   --font-body: "LCE Text", Arial, Helvetica, sans-serif;
 
   /* Fluid type scale */
