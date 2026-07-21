@@ -313,6 +313,11 @@ const downloads = [
     max-height: 380px;
     aspect-ratio: 4/3;
     object-fit: cover;
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
+  }
+  .hero__figure:hover :global(img) {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-card-hover);
   }
   .hero__figure figcaption {
     margin-top: 0.5rem;
@@ -338,6 +343,10 @@ const downloads = [
   .bausteine__item img {
     margin-inline: auto;
     margin-bottom: 1rem;
+    transition: transform 0.25s ease;
+  }
+  .bausteine__item:hover img {
+    transform: translateY(-4px) scale(1.06);
   }
   .bausteine__item h3 {
     margin-bottom: 0.5rem;
@@ -413,6 +422,11 @@ const downloads = [
     max-height: 360px;
     aspect-ratio: 4/3;
     object-fit: cover;
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
+  }
+  .planungsstand__figure:hover :global(img) {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-card-hover);
   }
   .planungsstand__figure figcaption {
     margin-top: 0.5rem;

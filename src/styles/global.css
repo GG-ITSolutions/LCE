@@ -1,25 +1,25 @@
 /* ---------- Design tokens ---------- */
 :root {
-  /* Brand colors (from the LCE concept) */
-  --color-primary: #a1ad46; /* Oliv – Akzent/Grafik */
-  --color-primary-dark: #7d8737;
+  /* Brand palette – exactly four brand colors:
+     #a1ad46 Oliv/Grün · #009fe3 Hellblau · #988b86 Warmgrau · #003761 Dunkelblau */
+  --color-primary: #a1ad46; /* Oliv/Grün */
+  --color-primary-dark: #8f9b3c; /* etwas dunkleres Oliv nur für Hover-Feedback */
   --color-secondary: #003761; /* Dunkelblau */
   --color-secondary-light: #0a4d80;
   --color-highlight: #009fe3; /* Hellblau – Text-Links/Akzent */
-  --color-dark-gray: #786d69;
-  --color-gray: #988b86;
+  --color-gray: #988b86; /* Warmgrau */
 
   --color-bg: #ffffff;
   --color-bg-muted: #f6f7f1;
-  --color-text: #1f2421;
-  --color-text-muted: #4a4744;
-  --color-border: #e3e1dc;
+  --color-text: #23201d;
+  --color-text-muted: #6b625d; /* aus dem Warmgrau abgeleitet, dunkel genug für Lesbarkeit */
+  --color-border: #e4e1db;
 
-  /* Button colors – deep olive so both the resting and hover state clear
-     WCAG AA (>=4.5:1) against white text and the CTA stands out on white. */
-  --btn-primary-bg: #667326;
-  --btn-primary-bg-hover: #545e1c;
-  --btn-primary-text: #ffffff;
+  /* Primary button: bright brand olive with dark-blue text (~5.4:1 → WCAG AA),
+     so the green stays light AND the label stays clearly legible. */
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-bg-hover: var(--color-primary-dark);
+  --btn-primary-text: var(--color-secondary);
 
   /* Typography – swap a typeface in ONE place: replace the woff2 files and the
      @font-face src in src/components/Fonts.astro. Everything references these tokens. */
@@ -157,6 +157,11 @@ ul {
 .section-head > :last-child {
   margin-bottom: 0;
 }
+/* Centered header: the lead paragraph has a max-width, so center the block too,
+   otherwise its centered text lines look shifted to the left. */
+.section-head:not(.section-head--left) .lead {
+  margin-inline: auto;
+}
 .section-head--left {
   margin-inline: 0;
   text-align: left;
@@ -204,8 +209,8 @@ ul {
 }
 .btn-primary:hover {
   background: var(--btn-primary-bg-hover);
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(102, 115, 38, 0.35);
+  color: var(--btn-primary-text);
+  box-shadow: 0 8px 20px rgba(161, 173, 70, 0.4);
 }
 .btn-secondary {
   background: transparent;
@@ -232,22 +237,6 @@ select:focus-visible,
   outline: none;
   box-shadow: var(--focus-ring);
   border-radius: 4px;
-}
-
-/* ---------- Skip link ---------- */
-.skip-link {
-  position: absolute;
-  left: 1rem;
-  top: -3rem;
-  background: var(--color-secondary);
-  color: #fff;
-  padding: 0.75em 1.25em;
-  border-radius: var(--radius-md);
-  z-index: 1000;
-  transition: top 0.15s ease;
-}
-.skip-link:focus {
-  top: 1rem;
 }
 
 /* ---------- Cards ---------- */
