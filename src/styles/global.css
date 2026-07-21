@@ -56,6 +56,13 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
 }
+/* Guard against horizontal scroll on mobile (decorative overlays, off-canvas nav).
+   `clip` prevents sideways scrolling/zoom-out without breaking the sticky header. */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

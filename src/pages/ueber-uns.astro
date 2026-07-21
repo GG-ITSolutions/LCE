@@ -138,7 +138,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   <section class="section section-muted" data-reveal>
     <div class="container">
       <SectionHeader eyebrow="Historie" title="Unsere Geschichte" />
-      <ol class="grid grid-3 timeline">
+      <ol class="timeline">
         {
           history.map((entry) => (
             <li class="timeline__item">
@@ -321,21 +321,77 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     margin-bottom: 0.5rem;
   }
 
+  /* Vertical timeline: a gradient rail that draws in on scroll, with a dot per
+     entry that grows on hover. */
   .timeline {
+    position: relative;
     list-style: none;
-    padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    padding: 0 0 0 3rem;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.75rem, 3vw, 2.75rem);
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-highlight));
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal].is-visible .timeline::before {
+      animation: drawLine 0.9s ease 0.15s both;
+    }
+  }
+  @keyframes drawLine {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
   }
   .timeline__item {
-    border-left: 3px solid var(--color-primary);
-    padding-left: 1.25rem;
+    position: relative;
+    transition: transform var(--transition);
+  }
+  .timeline__item::before {
+    content: "";
+    position: absolute;
+    left: -3rem;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 3px solid var(--color-primary);
+    transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  }
+  .timeline__item:hover {
+    transform: translateX(4px);
+  }
+  .timeline__item:hover::before {
+    transform: scale(1.25);
+    background: var(--color-highlight);
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 0 6px rgba(0, 159, 227, 0.15);
   }
   .timeline__year {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.5rem;
     color: var(--color-primary-dark);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+  .timeline__item h3 {
+    margin-bottom: 0.4rem;
   }
   .timeline__item :global(a) {
     color: var(--color-highlight);
@@ -363,6 +419,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     aspect-ratio: 1;
     object-fit: cover;
     width: 100%;
+    height: auto;
     transition: transform 0.4s ease;
   }
   /* Whole-card hover: image zoom + badge pops to the brand olive + name turns blue */
@@ -432,7 +489,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     max-height: 480px;
     aspect-ratio: 4/5;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 30%;
     transition: transform 0.4s ease;
   }
   .testimonial__image:hover :global(img) {
