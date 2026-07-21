@@ -333,6 +333,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     flex-direction: column;
     gap: clamp(1.75rem, 3vw, 2.75rem);
   }
+  /* Base track (faint, full height) */
   .timeline::before {
     content: "";
     position: absolute;
@@ -341,26 +342,23 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     bottom: 8px;
     width: 2px;
     border-radius: 2px;
+    background: var(--color-border);
+  }
+  /* Progress fill – its height follows scroll via the --tl-progress variable
+     (0→1) set in JS. It overlays the base track from the top down. */
+  .timeline::after {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 8px;
+    width: 2px;
+    border-radius: 2px;
+    height: calc(var(--tl-progress, 0) * (100% - 16px));
     background: linear-gradient(180deg, var(--color-primary), var(--color-highlight));
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    [data-reveal].is-visible .timeline::before {
-      animation: drawLine 0.9s ease 0.15s both;
-    }
-  }
-  @keyframes drawLine {
-    from {
-      transform: scaleY(0);
-    }
-    to {
-      transform: scaleY(1);
-    }
+    transition: height 0.15s linear;
   }
   .timeline__item {
     position: relative;
-    transition: transform var(--transition);
   }
   .timeline__item::before {
     content: "";
@@ -372,16 +370,13 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     border-radius: 50%;
     background: var(--color-bg);
     border: 3px solid var(--color-primary);
-    transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  .timeline__item:hover {
-    transform: translateX(4px);
-  }
-  .timeline__item:hover::before {
-    transform: scale(1.25);
+  /* Dot turns blue once the scrolling fill line has reached it */
+  .timeline__item.is-active::before {
     background: var(--color-highlight);
     border-color: var(--color-highlight);
-    box-shadow: 0 0 0 6px rgba(0, 159, 227, 0.15);
+    box-shadow: 0 0 0 5px rgba(0, 159, 227, 0.16);
   }
   .timeline__year {
     font-family: var(--font-heading);
@@ -575,3 +570,42 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     }
   }
 </style>
+
+<script>
+  // Scroll-driven timeline: the gradient fill grows as you scroll, and each dot
+  // turns blue the moment the fill line reaches it.
+  const timeline = document.querySelector<HTMLElement>(".timeline");
+  if (timeline) {
+    const items = Array.from(timeline.querySelectorAll<HTMLElement>(".timeline__item"));
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduced) {
+      // No animation: show the final state (full line, all dots active).
+      timeline.style.setProperty("--tl-progress", "1");
+      items.forEach((it) => it.classList.add("is-active"));
+    } else {
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const rect = timeline.getBoundingClientRect();
+        const triggerY = window.innerHeight * 0.55;
+        const progress = Math.min(1, Math.max(0, (triggerY - rect.top) / rect.height));
+        timeline.style.setProperty("--tl-progress", String(progress));
+        items.forEach((it) => {
+          const r = it.getBoundingClientRect();
+          const dotY = r.top + 14; // dot sits near the top of each entry
+          it.classList.toggle("is-active", dotY <= triggerY);
+        });
+      };
+      const onScroll = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      };
+      update();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", update);
+    }
+  }
+</script>
