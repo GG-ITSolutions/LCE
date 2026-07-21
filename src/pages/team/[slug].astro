@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { withBase } from "../../lib/paths";
+import { COMPANY_LINKEDIN } from "../../lib/team";
 
 export async function getStaticPaths() {
   const team = await getCollection("team", ({ data }) => data.hasProfile);
@@ -11,10 +12,6 @@ export async function getStaticPaths() {
     props: { member },
   }));
 }
-
-// LCE company LinkedIn – same for every team member.
-// TODO Redaktion: durch die echte LCE-Unternehmens-LinkedIn-URL ersetzen (oder leeren, um den Button auszublenden).
-const COMPANY_LINKEDIN = "https://www.linkedin.com/company/PLATZHALTER";
 
 const { member } = Astro.props;
 const { data } = member;

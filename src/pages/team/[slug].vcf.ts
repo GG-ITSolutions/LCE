@@ -1,7 +1,17 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { COMPANY_LINKEDIN } from "../../lib/team";
 
 const ORG = "LU-City Entwicklungs-GmbH (LCE)";
+
+// Escape a value for a vCard text field (RFC 6350 / 2426).
+function esc(value: string): string {
+  return value
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/,/g, "\\,")
+    .replace(/;/g, "\\;");
+}
 const ADR = {
   street: "Mundenheimer Str. 182",
   city: "Ludwigshafen am Rhein",
@@ -28,20 +38,25 @@ export const GET: APIRoute = ({ props }) => {
   const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
-    `N:${last};${first};;;`,
-    `FN:${data.name}`,
-    `ORG:${ORG}`,
-    `TITLE:${data.role}`,
-    `EMAIL;TYPE=INTERNET,WORK:${data.email}`,
+    "PRODID:-//LCE//Website vCard//DE",
+    `N:${esc(last)};${esc(first)};;;`,
+    `FN:${esc(data.name)}`,
+    `ORG:${esc(ORG)}`,
+    `TITLE:${esc(data.role)}`,
+    `EMAIL;TYPE=INTERNET,WORK:${esc(data.email)}`,
   ];
-  if (data.phone) lines.push(`TEL;TYPE=WORK,VOICE:${data.phone}`);
-  if (data.linkedin) lines.push(`URL:${data.linkedin}`);
+  if (data.phone) lines.push(`TEL;TYPE=WORK,VOICE:${esc(data.phone)}`);
+  if (data.linkedin) lines.push(`URL:${esc(data.linkedin)}`);
+  // LCE-Unternehmens-LinkedIn (bei allen Mitgliedern gleich)
+  lines.push(`URL:${esc(COMPANY_LINKEDIN)}`);
   lines.push(
-    `ADR;TYPE=WORK:;;${ADR.street};${ADR.city};;${ADR.zip};${ADR.country}`,
+    `ADR;TYPE=WORK:;;${esc(ADR.street)};${esc(ADR.city)};;${esc(ADR.zip)};${esc(ADR.country)}`,
     "END:VCARD",
   );
 
-  const body = lines.join("\r\n") + "\r\n";
+  // UTF-8-BOM voranstellen: Outlook liest heruntergeladene .vcf sonst als
+  // Windows-1252 → falsch dargestellte Umlaute (z. B. "Köhler").
+  const body = "﻿" + lines.join("\r\n") + "\r\n";
   return new Response(body, {
     headers: {
       "Content-Type": "text/vcard; charset=utf-8",

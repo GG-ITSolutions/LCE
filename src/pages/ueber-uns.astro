@@ -179,7 +179,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
                   {member.data.hasProfile ? (
                     <a href={withBase(`/team/${member.slug}`)}>{member.data.name}</a>
                   ) : (
-                    <a href={`mailto:${member.data.email}`}>{member.data.name}</a>
+                    member.data.name
                   )}
                 </h3>
                 <a href={`mailto:${member.data.email}`} class="team-card__mail">{member.data.email}</a>
@@ -427,14 +427,20 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     transform: scale(1.05);
   }
   .team-card:hover .team-card__badge {
-    background: var(--color-primary);
-    color: var(--color-secondary);
+    background: var(--btn-primary-bg);
+    color: #fff;
+    transform: rotate(-3deg) scale(1.05);
   }
   .team-card:hover h3 a {
     color: var(--color-highlight);
   }
   .team-card__badge {
-    transition: background-color var(--transition), color var(--transition);
+    transition: background-color var(--transition), color var(--transition), transform var(--transition);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .team-card:hover .team-card__badge {
+      transform: none;
+    }
   }
   .team-card h3 a {
     transition: color var(--transition);
