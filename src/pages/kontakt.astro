@@ -40,10 +40,11 @@ const faqs = [
           Kontaktformular oder wenden Sie sich direkt an die passende Stelle.
         </p>
 
-        <form method="POST" action="/formular/kontakt.php" class="kontakt-form" novalidate>
+        <form method="POST" action="/formular/kontakt.php" class="kontakt-form">
+          <p class="kontakt-form__note">Mit <span class="req-mark">*</span> markierte Felder sind Pflichtfelder.</p>
           <div class="kontakt-form__grid">
             <div class="field">
-              <label for="Vor--und-Nachname">Vor- und Nachname</label>
+              <label for="Vor--und-Nachname">Vor- und Nachname <span class="req-mark" aria-hidden="true">*</span></label>
               <input
                 type="text"
                 id="Vor--und-Nachname"
@@ -52,10 +53,12 @@ const faqs = [
                 maxlength="256"
                 autocomplete="name"
                 required
+                aria-required="true"
               />
+              <p class="field__error">Bitte geben Sie Ihren Namen ein.</p>
             </div>
             <div class="field">
-              <label for="E-Mail">E-Mail</label>
+              <label for="E-Mail">E-Mail <span class="req-mark" aria-hidden="true">*</span></label>
               <input
                 type="email"
                 id="E-Mail"
@@ -63,8 +66,11 @@ const faqs = [
                 placeholder="mustermann@beispiel.de"
                 maxlength="256"
                 autocomplete="email"
+                inputmode="email"
                 required
+                aria-required="true"
               />
+              <p class="field__error">Bitte geben Sie eine gültige E-Mail-Adresse ein (z.&nbsp;B. name@beispiel.de).</p>
             </div>
             <div class="field">
               <label for="Telefonnummer">Telefonnummer</label>
@@ -75,6 +81,7 @@ const faqs = [
                 placeholder="+49 621 12345678"
                 maxlength="256"
                 autocomplete="tel"
+                inputmode="tel"
               />
             </div>
             <div class="field">
@@ -91,8 +98,9 @@ const faqs = [
               </select>
             </div>
             <div class="field field--full">
-              <label for="Nachricht">Nachricht</label>
-              <textarea id="Nachricht" name="Nachricht" maxlength="5000" placeholder="Geben Sie Ihre Nachricht ein.." rows="5"></textarea>
+              <label for="Nachricht">Nachricht <span class="req-mark" aria-hidden="true">*</span></label>
+              <textarea id="Nachricht" name="Nachricht" maxlength="5000" placeholder="Geben Sie Ihre Nachricht ein.." rows="5" required aria-required="true"></textarea>
+              <p class="field__error">Bitte geben Sie eine Nachricht ein.</p>
             </div>
 
             <!--
@@ -106,13 +114,14 @@ const faqs = [
 
             <div class="field field--full">
               <label class="checkbox">
-                <input type="checkbox" id="Datenschutz" name="Datenschutz" required />
+                <input type="checkbox" id="Datenschutz" name="Datenschutz" required aria-required="true" />
                 <span>
-                  Ich akzeptiere die <a href={withBase("/datenschutz")}>Datenschutzbestimmungen</a>. Mit
+                  Ich akzeptiere die <a href={withBase("/datenschutz")}>Datenschutzbestimmungen</a> <span class="req-mark" aria-hidden="true">*</span>. Mit
                   dem Absenden des Formulars stimmen Sie der Verarbeitung Ihrer Angaben zur
                   Bearbeitung Ihrer Anfrage zu.
                 </span>
               </label>
+              <p class="field__error field__error--checkbox">Bitte akzeptieren Sie die Datenschutzbestimmungen.</p>
             </div>
 
             <button type="submit" class="btn btn-primary field--full">Anfrage absenden</button>
@@ -199,6 +208,15 @@ const faqs = [
   .kontakt-form {
     margin-top: 2rem;
   }
+  .kontakt-form__note {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+  .req-mark {
+    color: var(--color-highlight);
+    font-weight: 700;
+  }
   .kontakt-form__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -228,9 +246,28 @@ const faqs = [
     font: inherit;
     background: #fff;
     color: var(--color-text);
+    transition: border-color var(--transition), box-shadow var(--transition);
   }
   .field textarea {
     resize: vertical;
+  }
+  /* Inline validation: only after the user has interacted (native :user-invalid) */
+  .field__error {
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+    color: #b3261e;
+    display: none;
+  }
+  .field input:user-invalid,
+  .field textarea:user-invalid {
+    border-color: #b3261e;
+  }
+  .field input:user-invalid ~ .field__error,
+  .field textarea:user-invalid ~ .field__error {
+    display: block;
+  }
+  .field:has(#Datenschutz:user-invalid) .field__error--checkbox {
+    display: block;
   }
   .checkbox {
     display: flex;

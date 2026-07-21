@@ -55,8 +55,9 @@ const kennzahlen = [
           src={heroImage}
           alt="3D-Visualisierung der geplanten Zukunftsquartiere entlang der Helmut-Kohl-Allee (Konzept ADEPT)"
           class="hero__image"
-          widths={[500, 800, 1080, 1600]}
-          sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 620px"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(max-width: 767px) 92vw, (max-width: 991px) 48vw, 620px"
+          quality={88}
           loading="eager"
           fetchpriority="high"
         />
@@ -82,13 +83,13 @@ const kennzahlen = [
           <a href={withBase("/ueber-uns")} class="accent-link">Mehr über uns →</a>
         </div>
         <div class="overview__image">
-          <Image src={teamImage} alt="Das LCE-Team bespricht das Städtebaumodell der Zukunftsquartiere" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+          <Image src={teamImage} alt="Das LCE-Team bespricht das Städtebaumodell der Zukunftsquartiere" widths={[640, 960, 1280]} sizes="(max-width: 767px) 92vw, 48vw" quality={88} />
         </div>
       </div>
 
       <div class="overview__row overview__row--reverse" data-reveal>
         <div class="overview__image">
-          <Image src={karteImage} alt="Stadtgrundkarte der Zukunftsquartiere an der Helmut-Kohl-Allee (Quelle: Stadtverwaltung Ludwigshafen am Rhein)" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+          <Image src={karteImage} alt="Stadtgrundkarte der Zukunftsquartiere an der Helmut-Kohl-Allee (Quelle: Stadtverwaltung Ludwigshafen am Rhein)" widths={[640, 960, 1280]} sizes="(max-width: 767px) 92vw, 48vw" quality={88} />
         </div>
         <div class="overview__text">
           <h3>Zukunftsquartiere an der Helmut-Kohl-Allee</h3>

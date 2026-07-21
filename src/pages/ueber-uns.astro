@@ -98,8 +98,11 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
         <Image
           src={heroImage}
           alt="Das LCE-Team im Gespräch am Städtebaumodell der Zukunftsquartiere"
-          widths={[500, 800, 1080]}
-          sizes="(max-width: 767px) 100vw, 460px"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(max-width: 767px) 92vw, 48vw"
+          quality={88}
+          loading="eager"
+          fetchpriority="high"
           class="hero__image"
         />
       </div>
@@ -191,7 +194,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   <section class="section section-muted" data-reveal>
     <div class="container testimonial">
       <div class="testimonial__image">
-        <Image src={sonjaImage} alt="Sonja Müller-Zaman, Geschäftsführerin der LCE" widths={[500, 800, 1080]} sizes="(max-width: 767px) 100vw, 460px" />
+        <Image src={sonjaImage} alt="Sonja Müller-Zaman, Geschäftsführerin der LCE" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
       </div>
       <div>
         <p class="eyebrow">Wer steht hinter der LCE?</p>
@@ -221,7 +224,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
         <p class="testimonial__name">Prof. Dr. Klaus Blettner<br /><span>Oberbürgermeister der Stadt Ludwigshafen</span></p>
       </div>
       <div class="testimonial__image">
-        <Image src={blettnerPortrait} alt="Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt Ludwigshafen" widths={[500, 800]} sizes="(max-width: 767px) 100vw, 460px" />
+        <Image src={blettnerPortrait} alt="Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
       </div>
     </div>
   </section>
@@ -229,7 +232,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   <section class="section section-muted" data-reveal>
     <div class="container testimonial">
       <div class="testimonial__image">
-        <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[500, 800]} sizes="(max-width: 767px) 100vw, 460px" />
+        <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
       </div>
       <div>
         <Image src={gagLogo} alt="Logo der GAG Ludwigshafen" width={220} height={70} class="testimonial__logo" />
@@ -440,12 +443,23 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     bottom: 0;
     width: 4px;
     border-radius: 2px;
-    background: linear-gradient(180deg, var(--color-primary), var(--color-highlight));
+    background: linear-gradient(180deg, var(--color-primary), var(--color-highlight), var(--color-primary));
+    background-size: 100% 200%;
+    background-position: 0 0;
     transform-origin: top;
-    transition: filter var(--transition);
+    transition: width var(--transition);
   }
-  .testimonial:hover blockquote::before {
-    filter: saturate(1.3) brightness(1.08);
+  /* On hover the gradient flows along the bar and it thickens slightly */
+  @media (prefers-reduced-motion: no-preference) {
+    .testimonial:hover blockquote::before {
+      width: 6px;
+      animation: barFlow 2.2s linear infinite;
+    }
+  }
+  @keyframes barFlow {
+    to {
+      background-position: 0 -200%;
+    }
   }
   /* Bar grows from the top when the testimonial scrolls into view */
   @media (prefers-reduced-motion: no-preference) {
