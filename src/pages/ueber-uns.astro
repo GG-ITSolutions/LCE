@@ -249,6 +249,11 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
 </BaseLayout>
 
 <style>
+  /* Hero is followed by a white section, so trim its bottom padding to keep the
+     gap to the first section as tight as on Home (where a grey section follows). */
+  .hero {
+    padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  }
   .hero__grid {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;

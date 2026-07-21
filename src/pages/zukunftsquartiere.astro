@@ -282,6 +282,9 @@ const downloads = [
   .hero {
     position: relative;
     overflow: hidden;
+    /* Followed by a white section — trim bottom padding to match Home's tighter
+       hero→section gap. */
+    padding-bottom: clamp(1.5rem, 3vw, 3rem);
   }
   .hero__grid {
     display: grid;
