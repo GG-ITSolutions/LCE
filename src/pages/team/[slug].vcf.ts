@@ -35,14 +35,17 @@ export const GET: APIRoute = ({ props }) => {
   const last = parts.length > 1 ? parts.pop()! : "";
   const first = parts.join(" ");
 
+  // CHARSET=UTF-8 an den Textfeldern: Hinweis für Outlook, damit Umlaute
+  // korrekt gelesen werden (KEIN BOM – ein BOM vor BEGIN:VCARD macht die
+  // Datei für viele Clients ungültig). Moderne Clients ignorieren den Parameter.
   const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
     "PRODID:-//LCE//Website vCard//DE",
-    `N:${esc(last)};${esc(first)};;;`,
-    `FN:${esc(data.name)}`,
-    `ORG:${esc(ORG)}`,
-    `TITLE:${esc(data.role)}`,
+    `N;CHARSET=UTF-8:${esc(last)};${esc(first)};;;`,
+    `FN;CHARSET=UTF-8:${esc(data.name)}`,
+    `ORG;CHARSET=UTF-8:${esc(ORG)}`,
+    `TITLE;CHARSET=UTF-8:${esc(data.role)}`,
     `EMAIL;TYPE=INTERNET,WORK:${esc(data.email)}`,
   ];
   if (data.phone) lines.push(`TEL;TYPE=WORK,VOICE:${esc(data.phone)}`);
@@ -50,13 +53,11 @@ export const GET: APIRoute = ({ props }) => {
   // LCE-Unternehmens-LinkedIn (bei allen Mitgliedern gleich)
   lines.push(`URL:${esc(COMPANY_LINKEDIN)}`);
   lines.push(
-    `ADR;TYPE=WORK:;;${esc(ADR.street)};${esc(ADR.city)};;${esc(ADR.zip)};${esc(ADR.country)}`,
+    `ADR;TYPE=WORK;CHARSET=UTF-8:;;${esc(ADR.street)};${esc(ADR.city)};;${esc(ADR.zip)};${esc(ADR.country)}`,
     "END:VCARD",
   );
 
-  // UTF-8-BOM voranstellen: Outlook liest heruntergeladene .vcf sonst als
-  // Windows-1252 → falsch dargestellte Umlaute (z. B. "Köhler").
-  const body = "﻿" + lines.join("\r\n") + "\r\n";
+  const body = lines.join("\r\n") + "\r\n";
   return new Response(body, {
     headers: {
       "Content-Type": "text/vcard; charset=utf-8",
