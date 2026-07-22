@@ -57,6 +57,11 @@ const year = 2026;
     padding: 0.65rem 1.4rem;
     border-radius: 999px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .site-footer__logo:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
   }
   .site-footer__logo img {
     display: block;

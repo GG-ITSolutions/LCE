@@ -389,10 +389,27 @@ const downloads = [
     align-items: center;
     gap: clamp(1rem, 3vw, 2.5rem);
     background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
+    background-size: 200% 200%;
+    animation: milestoneBreath 14s ease-in-out infinite;
     color: #fff;
     border-radius: var(--radius-lg);
     padding: clamp(1.75rem, 3vw, 2.75rem);
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  /* langsames, ruhiges „Atmen" des Verlaufs – passt zur Zukunfts-Aussage */
+  @keyframes milestoneBreath {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .milestone {
+      animation: none;
+    }
   }
   .milestone__year {
     font-family: var(--font-heading);
