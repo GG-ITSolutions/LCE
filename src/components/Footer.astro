@@ -75,12 +75,30 @@ const year = 2026;
     padding: 0;
   }
   .site-footer__nav a {
+    position: relative;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
+    padding-bottom: 3px;
+  }
+  /* Animierter Unterstrich wie in der Kopfnavigation */
+  .site-footer__nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-highlight);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
   }
   .site-footer__nav a:hover {
-    text-decoration: underline;
+    color: var(--color-highlight);
+  }
+  .site-footer__nav a:hover::after {
+    transform: scaleX(1);
   }
   .site-footer__bottom {
     display: flex;
@@ -103,6 +121,27 @@ const year = 2026;
     padding: 0;
   }
   .site-footer__legal a {
+    position: relative;
     color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding-bottom: 3px;
+  }
+  .site-footer__legal a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-highlight);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+  }
+  .site-footer__legal a:hover {
+    color: var(--color-highlight);
+  }
+  .site-footer__legal a:hover::after {
+    transform: scaleX(1);
   }
 </style>
