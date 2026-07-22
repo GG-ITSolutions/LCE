@@ -388,26 +388,66 @@ const downloads = [
     flex-wrap: wrap;
     align-items: center;
     gap: clamp(1rem, 3vw, 2.5rem);
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
-    background-size: 200% 200%;
-    animation: milestoneBreath 14s ease-in-out infinite;
     color: #fff;
     border-radius: var(--radius-lg);
     padding: clamp(1.75rem, 3vw, 2.75rem);
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
-  /* langsames, ruhiges „Atmen" des Verlaufs – passt zur Zukunfts-Aussage */
-  @keyframes milestoneBreath {
+  /* Sanft driftende, weich leuchtende Kreise in den Logo-Farben (Oliv + Hellblau)
+     – greift die „Ballons" des LCE-Logos auf, dezent und deutlich sichtbar. */
+  .milestone::before,
+  .milestone::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(34px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .milestone::before {
+    width: 260px;
+    height: 260px;
+    top: -90px;
+    left: -50px;
+    background: radial-gradient(circle, rgba(161, 173, 70, 0.85), transparent 70%);
+    animation: milestoneOrbA 16s ease-in-out infinite;
+  }
+  .milestone::after {
+    width: 300px;
+    height: 300px;
+    right: -60px;
+    bottom: -110px;
+    background: radial-gradient(circle, rgba(0, 159, 227, 0.8), transparent 70%);
+    animation: milestoneOrbB 21s ease-in-out infinite;
+  }
+  .milestone > * {
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes milestoneOrbA {
     0%,
     100% {
-      background-position: 0% 50%;
+      transform: translate(0, 0);
     }
     50% {
-      background-position: 100% 50%;
+      transform: translate(46px, 26px);
+    }
+  }
+  @keyframes milestoneOrbB {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-38px, -30px);
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .milestone {
+    .milestone::before,
+    .milestone::after {
       animation: none;
     }
   }
