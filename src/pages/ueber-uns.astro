@@ -10,7 +10,7 @@ import iconGanzheitlich from "../assets/images/2.png";
 import iconPlanungssicher from "../assets/images/3.png";
 import iconUmsetzung from "../assets/images/4.png";
 import sonjaImage from "../assets/images/Sonja-2.png";
-import stadtLogo from "../assets/images/Design-ohne-Titel-27.png";
+import stadtLogo from "../assets/images/Wortmarke-Ludwigshafen.jpg";
 import gagLogo from "../assets/images/Design-ohne-Titel-25.png";
 import blettnerPortrait from "../assets/images/2_4.png";
 import vanVlietPortrait from "../assets/images/1_3.png";
@@ -34,7 +34,7 @@ const values = [
   {
     icon: iconUmsetzung,
     title: "Umsetzung städtischer Ziele",
-    text: "Die LCE schafft die Voraussetzungen für neues Baurecht und begleitet die Umsetzung städtischer Entwicklungsziele als Schnittstelle zwischen Stadtverwaltung, Politik und weiteren Beteiligten.",
+    text: "Die LCE schafft die Grundlagen für die Bauleitplanung und treibt durch die Entwicklung und Vermarktung der Flächen die Umsetzung städtebaulicher Ziele voran. Dabei fungiert sie als Schnittstelle und vermittelnde Instanz zwischen Stadtverwaltung, Politik und weiteren Beteiligten.",
   },
 ];
 
@@ -68,6 +68,11 @@ const history = [
     year: "2025",
     title: "Abschluss des Werkstattverfahrens",
     text: "Abschluss des Werkstattverfahrens mit fachlicher Empfehlung der Jury und Überführung der Ergebnisse in die weitere Rahmenplanung der Zukunftsquartiere.",
+  },
+  {
+    year: "2026",
+    title: "Rahmenplanung",
+    text: "Mit dem Beschluss zur Offenlage und der öffentlichen Auslegung erreicht die Rahmenplanung einen wichtigen Meilenstein. Der Beschluss der finalen Rahmenplanung durch den Stadtrat wird für September 2026 erwartet und bildet die Grundlage für die weitere Entwicklung der Zukunftsquartiere.",
   },
 ];
 
@@ -113,12 +118,14 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     <div class="container">
       <SectionHeader eyebrow="Selbstverständnis" title="Wofür die LCE steht" align="left">
         <p class="lead">
-          Ein wesentlicher Aufgabenbereich der LCE ist die Vorbereitung städtebaulicher
-          Planungen. Dazu zählen die Beauftragung und Koordination von Untersuchungen,
-          Planungs- und Machbarkeitsstudien sowie die Steuerung komplexer Planungsverfahren.
-          Auch die Organisation von Mehrfachbeauftragungen, wie dem Werkstattverfahren zur
-          Erarbeitung eines Gesamtkonzepts für die Zukunftsquartiere, gehört zum
-          Leistungsumfang der LCE.
+          Ein wesentlicher Aufgabenbereich der LCE ist die Vorbereitung und Steuerung
+          städtebaulicher Planungen. Dazu gehören die Beauftragung und Koordination von
+          Untersuchungen, Planungs- und Machbarkeitsstudien sowie die Organisation von
+          Mehrfachbeauftragungen, wie beispielsweise dem Werkstattverfahren zur Erarbeitung
+          eines Gesamtkonzepts für die Zukunftsquartiere. Darauf aufbauend begleitet die LCE
+          die Beauftragung der Rahmenplanung und koordiniert im weiteren Verlauf die
+          anschließende Bauleitplanung sowie die damit verbundenen Planungs- und
+          Abstimmungsprozesse.
         </p>
       </SectionHeader>
       <div class="grid grid-2 values">
@@ -213,7 +220,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   <section class="section" data-reveal>
     <div class="container testimonial testimonial--reverse">
       <div>
-        <Image src={stadtLogo} alt="Logo der Stadt Ludwigshafen am Rhein" width={220} height={70} class="testimonial__logo" />
+        <Image src={stadtLogo} alt="Wortmarke der Stadt Ludwigshafen am Rhein" width={264} height={64} class="testimonial__logo" />
         <blockquote>
           "Die Entwicklung der Zukunftsquartiere steht exemplarisch für den Wandel und die
           Innovationskraft unserer Stadt. Mit der LU-City Entwicklungs-GmbH haben wir eine
