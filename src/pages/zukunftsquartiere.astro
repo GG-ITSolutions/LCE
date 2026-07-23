@@ -82,6 +82,26 @@ const downloads = [
         text: "Die in der Stadtratssitzung am 22.09.2025 gezeigte Rahmenpräsentation zur Vorstellung der Ergebnisse des Werkstattverfahrens.",
         href: withBase("/documents/Praesentation-Stadtrat_inkl_ADEPT.pdf"),
       },
+      {
+        title: "Präsentation Stadtrat am 22.06.2026",
+        text: "Die in der Stadtratssitzung am 22.06.2026 gezeigte Präsentation zur Vorstellung des Rahmenplans Zukunftsquartiere.",
+        href: withBase("/documents/20260608_LUD_Stadtrat_ADEPT_2.pdf"),
+      },
+      {
+        title: "Erläuterungsbericht Rahmenplan Zukunftsquartiere",
+        text: "",
+        href: withBase("/documents/20260608_LUD_Erlaeuterungsbericht_ADEPT.pdf"),
+      },
+    ],
+  },
+  {
+    category: "Pläne",
+    items: [
+      {
+        title: "Rahmenplan Zukunftsquartiere",
+        text: "Der Rahmenplan der Zukunftsquartiere (Stand Juni 2026).",
+        href: withBase("/documents/20260622_LUD_Rahmenplan_ADEPT.pdf"),
+      },
     ],
   },
   {
@@ -265,7 +285,7 @@ const downloads = [
                         <strong>{item.title}</strong>
                         <a href={item.href} class="downloads__link">Herunterladen</a>
                       </div>
-                      <p>{item.text}</p>
+                      {item.text && <p>{item.text}</p>}
                     </div>
                   ))}
                 </div>
