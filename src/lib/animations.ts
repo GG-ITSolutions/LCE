@@ -49,6 +49,11 @@ export function initCountUp() {
     if (!p) return; // rein textliche Werte ("Mehrere Baufelder") bleiben statisch
     if (prefersReduced()) return; // Endwert steht bereits im HTML
 
+    // Sofort auf 0 zurücksetzen (nicht erst in onEnter): sonst steht bei hohen
+    // Sektionen der fertige Endwert noch lange sichtbar da und springt dann
+    // unvermittelt auf 0 zurück, sobald der Trigger verzögert auslöst.
+    el.textContent = "0" + p.suffix;
+
     const state = { v: 0 };
     ScrollTrigger.create({
       trigger: el,
@@ -83,6 +88,9 @@ export function initStandortCount() {
     if (Number.isNaN(target)) return;
     const digits = (el.textContent || "").trim().length;
 
+    // Sofort auf 00 zurücksetzen (nicht erst in onEnter), siehe initCountUp.
+    el.textContent = "0".padStart(digits, "0");
+
     const state = { v: 0 };
     ScrollTrigger.create({
       trigger: el,
@@ -116,13 +124,17 @@ export function initMilestoneCount(startYear: number) {
   const target = parseInt(m[1], 10);
   const suffix = m[2];
 
+  // Sofort auf das Startjahr zurücksetzen (nicht erst in onEnter): sonst steht
+  // bei dieser hohen Sektion der fertige Endwert noch lange sichtbar da und
+  // springt dann unvermittelt zurück, sobald der (verzögerte) Trigger auslöst.
+  el.textContent = startYear + suffix;
+
   const state = { v: startYear };
   ScrollTrigger.create({
     trigger: el,
     start: "top 85%",
     once: true,
     onEnter: () => {
-      el.textContent = startYear + suffix; // Startpunkt erst beim Eintritt setzen
       gsap.to(state, {
         v: target,
         duration: 2.2,
