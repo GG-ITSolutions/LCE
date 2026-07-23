@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { withBase } from "../lib/paths";
+import { FOUNDING_YEAR } from "../lib/company";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import heroImage from "../assets/images/Design-ohne-Titel-19.png";
@@ -40,7 +41,7 @@ const values = [
 
 const history = [
   {
-    year: "2003",
+    year: String(FOUNDING_YEAR),
     title: "Rheinufer Süd Entwicklungs-GmbH",
     text: `Gründung der Rheinufer Süd Entwicklungs-GmbH (RSE) zur Entwicklung städtebaulich relevanter Flächen und zur Umsetzung zentraler Entwicklungsprojekte in Ludwigshafen. Insbesondere die <a href="${withBase("/documents/Brochure-RSE.pdf")}">Entwicklung des Stadtquartiers Rheinufer Süd</a> prägte die Arbeit der Gesellschaft.`,
   },
