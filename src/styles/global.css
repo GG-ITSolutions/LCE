@@ -429,43 +429,51 @@ select:focus-visible,
 }
 
 /* ---------- Scroll reveal (opt-in via data-reveal) ----------
-   Fail-safe: elements are fully visible by default and only *animate in* when JS
-   adds .is-visible. If JS never runs (or the element is never observed), the
-   content simply stays visible — it is never hidden. */
+   Fail-safe: without JS (no ".js" class on <html>, set synchronously in
+   BaseLayout before first paint) elements are fully visible and never
+   animate — the content simply stays visible.
+   Uses `transition`, not `animation`: a CSS `animation` always snaps to its
+   0% keyframe the instant it (re)starts, which caused a visible flash
+   (opaque → briefly invisible → fade back in) for elements that were
+   already on screen when `.is-visible` was added. A transition instead
+   interpolates from whatever the element's current state actually is. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal].is-visible {
-    animation: reveal 0.55s ease both;
-  }
-  /* Staggered entrance for grid/card children inside a revealed section */
-  [data-reveal].is-visible .grid > *,
-  [data-reveal].is-visible .card-grid > * {
-    animation: reveal 0.55s ease both;
-  }
-  [data-reveal].is-visible .grid > :nth-child(2),
-  [data-reveal].is-visible .card-grid > :nth-child(2) {
-    animation-delay: 0.08s;
-  }
-  [data-reveal].is-visible .grid > :nth-child(3),
-  [data-reveal].is-visible .card-grid > :nth-child(3) {
-    animation-delay: 0.16s;
-  }
-  [data-reveal].is-visible .grid > :nth-child(4),
-  [data-reveal].is-visible .card-grid > :nth-child(4) {
-    animation-delay: 0.24s;
-  }
-  [data-reveal].is-visible .grid > :nth-child(n + 5),
-  [data-reveal].is-visible .card-grid > :nth-child(n + 5) {
-    animation-delay: 0.32s;
-  }
-}
-@keyframes reveal {
-  from {
+  .js [data-reveal] {
     opacity: 0;
     transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
   }
-  to {
+  .js [data-reveal].is-visible {
     opacity: 1;
     transform: none;
+  }
+  /* Staggered entrance for grid/card children inside a revealed section */
+  .js [data-reveal] .grid > *,
+  .js [data-reveal] .card-grid > * {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .js [data-reveal].is-visible .grid > *,
+  .js [data-reveal].is-visible .card-grid > * {
+    opacity: 1;
+    transform: none;
+  }
+  .js [data-reveal] .grid > :nth-child(2),
+  .js [data-reveal] .card-grid > :nth-child(2) {
+    transition-delay: 0.08s;
+  }
+  .js [data-reveal] .grid > :nth-child(3),
+  .js [data-reveal] .card-grid > :nth-child(3) {
+    transition-delay: 0.16s;
+  }
+  .js [data-reveal] .grid > :nth-child(4),
+  .js [data-reveal] .card-grid > :nth-child(4) {
+    transition-delay: 0.24s;
+  }
+  .js [data-reveal] .grid > :nth-child(n + 5),
+  .js [data-reveal] .card-grid > :nth-child(n + 5) {
+    transition-delay: 0.32s;
   }
 }
 

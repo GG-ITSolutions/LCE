@@ -548,17 +548,17 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
       background-position: 0 -200%;
     }
   }
-  /* Bar grows from the top when the testimonial scrolls into view */
+  /* Bar grows from the top when the testimonial scrolls into view.
+     Gated behind .js (see BaseLayout) + transition instead of a CSS
+     `animation`, so it never flashes for a bar that's already fully grown
+     by default (fail-safe without JS) — see the scroll-reveal comment in
+     global.css for the full explanation of that bug class. */
   @media (prefers-reduced-motion: no-preference) {
-    [data-reveal].is-visible .testimonial blockquote::before {
-      animation: barGrow 0.7s ease 0.1s both;
-    }
-  }
-  @keyframes barGrow {
-    from {
+    .js .testimonial blockquote::before {
       transform: scaleY(0);
+      transition: transform 0.7s ease 0.1s;
     }
-    to {
+    .js [data-reveal].is-visible .testimonial blockquote::before {
       transform: scaleY(1);
     }
   }

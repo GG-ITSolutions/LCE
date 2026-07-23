@@ -47,6 +47,12 @@ const organizationSchema = {
 <!doctype html>
 <html lang="de">
   <head>
+    <script is:inline>
+      // Synchron (blockierend) vor dem ersten Paint gesetzt: erst dadurch greifen
+      // die [data-reveal]-Scroll-Animationen in global.css. Ohne JS bleibt der
+      // Inhalt (mangels ".js"-Klasse) einfach immer sichtbar – kein Flackern möglich.
+      document.documentElement.classList.add("js");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Seo title={title} description={description} image={image} noindex={noindex} />
