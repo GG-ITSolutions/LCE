@@ -264,21 +264,66 @@ const kennzahlen = [
     justify-content: space-between;
     gap: 2rem;
   }
+  /* Sanft driftende, weich leuchtende Kreise (Hellblau) – wie beim 2030-Meilenstein */
+  .cta-card::before,
   .cta-card::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 100% 0%, rgba(161, 173, 70, 0.35), transparent 55%);
+    border-radius: 50%;
+    filter: blur(34px);
     pointer-events: none;
+    z-index: 0;
+  }
+  .cta-card::before {
+    width: 260px;
+    height: 260px;
+    top: -90px;
+    left: -60px;
+    background: radial-gradient(circle, rgba(0, 159, 227, 0.75), transparent 70%);
+    animation: ctaOrbA 14s ease-in-out infinite;
+  }
+  .cta-card::after {
+    width: 300px;
+    height: 300px;
+    right: -70px;
+    bottom: -120px;
+    background: radial-gradient(circle, rgba(0, 159, 227, 0.75), transparent 70%);
+    animation: ctaOrbB 21s ease-in-out infinite;
+  }
+  @keyframes ctaOrbA {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(110px, 55px);
+    }
+  }
+  @keyframes ctaOrbB {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-95px, -60px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-card::before,
+    .cta-card::after {
+      animation: none;
+    }
   }
   .cta-card h2 {
     color: #fff;
     max-width: 40ch;
     margin: 0;
     position: relative;
+    z-index: 1;
   }
   .cta-card > :global(.btn) {
     position: relative;
+    z-index: 1;
   }
 </style>
 
