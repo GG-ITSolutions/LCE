@@ -70,6 +70,40 @@ export function initCountUp() {
   });
 }
 
+/** Standortvorteile: die Nummern (01–04) zählen beim Ins-Bild-Scrollen
+ *  von 00 auf ihren Wert hoch, mit erhaltener führender Null. */
+export function initStandortCount() {
+  const els = Array.from(
+    document.querySelectorAll<HTMLElement>(".standort-card__num")
+  );
+  if (!els.length || prefersReduced()) return;
+
+  els.forEach((el) => {
+    const target = parseInt((el.textContent || "").trim(), 10);
+    if (Number.isNaN(target)) return;
+    const digits = (el.textContent || "").trim().length;
+
+    const state = { v: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      once: true,
+      onEnter: () =>
+        gsap.to(state, {
+          v: target,
+          duration: 0.9,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent = String(Math.round(state.v)).padStart(digits, "0");
+          },
+          onComplete: () => {
+            el.textContent = String(target).padStart(digits, "0");
+          },
+        }),
+    });
+  });
+}
+
 /** Timeline „Unsere Geschichte": Linie füllt sich beim Scrollen (scrub),
  *  jeder Punkt wird blau, sobald die Fülllinie ihn erreicht. */
 export function initTimeline() {
