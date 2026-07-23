@@ -590,40 +590,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
 </style>
 
 <script>
-  // Scroll-driven timeline: the gradient fill grows as you scroll, and each dot
-  // turns blue the moment the fill line reaches it.
-  const timeline = document.querySelector<HTMLElement>(".timeline");
-  if (timeline) {
-    const items = Array.from(timeline.querySelectorAll<HTMLElement>(".timeline__item"));
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduced) {
-      // No animation: show the final state (full line, all dots active).
-      timeline.style.setProperty("--tl-progress", "1");
-      items.forEach((it) => it.classList.add("is-active"));
-    } else {
-      let ticking = false;
-      const update = () => {
-        ticking = false;
-        const rect = timeline.getBoundingClientRect();
-        const triggerY = window.innerHeight * 0.55;
-        const progress = Math.min(1, Math.max(0, (triggerY - rect.top) / rect.height));
-        timeline.style.setProperty("--tl-progress", String(progress));
-        items.forEach((it) => {
-          const r = it.getBoundingClientRect();
-          const dotY = r.top + 14; // dot sits near the top of each entry
-          it.classList.toggle("is-active", dotY <= triggerY);
-        });
-      };
-      const onScroll = () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(update);
-        }
-      };
-      update();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", update);
-    }
-  }
+  import { initHeroReveal, initTimeline } from "../lib/animations";
+  initHeroReveal();
+  initTimeline();
 </script>

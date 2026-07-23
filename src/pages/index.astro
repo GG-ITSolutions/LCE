@@ -328,48 +328,7 @@ const kennzahlen = [
 </style>
 
 <script>
-  // Count-up für die Kennzahlen: die führende Zahl zählt beim Ins-Bild-Scrollen
-  // von 0 auf den Zielwert hoch (Suffix wie " ha"/" Bausteine" bleibt erhalten).
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const els = Array.from(document.querySelectorAll<HTMLElement>(".kennzahlen__value"));
-
-  type Parsed = { target: number; suffix: string };
-  const parse = (txt: string): Parsed | null => {
-    const m = txt.match(/^\s*(\d[\d.]*)(.*)$/s);
-    if (!m) return null;
-    return { target: parseInt(m[1].replace(/\./g, ""), 10), suffix: m[2] };
-  };
-
-  if (!reduce && els.length && "IntersectionObserver" in window) {
-    const animate = (el: HTMLElement, p: Parsed) => {
-      const duration = 1200;
-      let start: number | null = null;
-      const step = (now: number) => {
-        if (start === null) start = now;
-        const t = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-        el.textContent = Math.round(eased * p.target) + p.suffix;
-        if (t < 1) requestAnimationFrame(step);
-        else el.textContent = p.target + p.suffix;
-      };
-      requestAnimationFrame(step);
-    };
-
-    const io = new IntersectionObserver(
-      (entries, obs) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          const p = parse(el.textContent || "");
-          if (p) animate(el, p);
-          obs.unobserve(el);
-        }
-      },
-      { threshold: 0.4 }
-    );
-
-    for (const el of els) {
-      if (parse(el.textContent || "")) io.observe(el);
-    }
-  }
+  import { initHeroReveal, initCountUp } from "../lib/animations";
+  initHeroReveal();
+  initCountUp();
 </script>
