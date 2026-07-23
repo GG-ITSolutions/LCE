@@ -91,8 +91,8 @@ export function initStandortCount() {
       onEnter: () =>
         gsap.to(state, {
           v: target,
-          duration: 0.9,
-          ease: "power2.out",
+          duration: 1.8,
+          ease: "none", // linear: bei kleinen Zielwerten (1–4) bleibt jede Zahl sichtbar lange genug
           onUpdate: () => {
             el.textContent = String(Math.round(state.v)).padStart(digits, "0");
           },
@@ -101,6 +101,37 @@ export function initStandortCount() {
           },
         }),
     });
+  });
+}
+
+/** Planungsstand-Meilenstein: die große Jahreszahl (z. B. "2030er") zählt
+ *  beim Ins-Bild-Scrollen von 0 hoch, das Suffix ("er") bleibt erhalten. */
+export function initMilestoneCount() {
+  const el = document.querySelector<HTMLElement>(".milestone__year");
+  if (!el || prefersReduced()) return;
+
+  const m = (el.textContent || "").trim().match(/^(\d+)(.*)$/s);
+  if (!m) return;
+  const target = parseInt(m[1], 10);
+  const suffix = m[2];
+
+  const state = { v: 0 };
+  ScrollTrigger.create({
+    trigger: el,
+    start: "top 85%",
+    once: true,
+    onEnter: () =>
+      gsap.to(state, {
+        v: target,
+        duration: 2.2,
+        ease: "power1.out",
+        onUpdate: () => {
+          el.textContent = Math.round(state.v) + suffix;
+        },
+        onComplete: () => {
+          el.textContent = target + suffix;
+        },
+      }),
   });
 }
 
