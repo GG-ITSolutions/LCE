@@ -7,6 +7,13 @@ import iconMail from "../assets/images/1_2.png";
 import iconPhone from "../assets/images/2_3.png";
 import iconLocation from "../assets/images/3_2.png";
 
+// Das Feld "Details" weiter unten im Formular ist ein Anti-Spam-Honeypot nach
+// TWL-Vorgabe: per CSS (.field--aux) unsichtbar, aus Tab-Reihenfolge und
+// Accessibility-Baum entfernt. kontakt.php muss Einsendungen mit ausgefülltem
+// "Details"-Feld verwerfen. Bewusst kein HTML-Kommentar im Template und kein
+// sprechender Klassenname, damit die Erkennungslogik nicht im ausgelieferten
+// Seitenquelltext auftaucht.
+
 const faqs = [
   {
     question: "Wer ist die LCE und was macht sie?",
@@ -103,11 +110,7 @@ const faqs = [
               <p class="field__error">Bitte geben Sie eine Nachricht ein.</p>
             </div>
 
-            <!--
-              Honeypot: unsichtbar für Menschen, aber für einfache Bots ausfüllbar.
-              Serverseitig (kontakt.php): Nachrichten mit ausgefülltem "Details"-Feld verwerfen.
-            -->
-            <div class="field field--full honeypot" aria-hidden="true">
+            <div class="field field--full field--aux" aria-hidden="true">
               <label for="Details">Details</label>
               <input type="text" id="Details" name="Details" tabindex="-1" autocomplete="off" />
             </div>
@@ -280,7 +283,7 @@ const faqs = [
     margin-top: 0.2rem;
     width: auto;
   }
-  .honeypot {
+  .field--aux {
     position: absolute !important;
     left: -9999px !important;
     width: 1px;
