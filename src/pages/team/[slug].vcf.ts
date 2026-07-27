@@ -4,6 +4,14 @@ import { COMPANY_LINKEDIN } from "../../lib/team";
 
 const ORG = "LU-City Entwicklungs-GmbH (LCE)";
 
+// Die Website zeigt die LCE-Domain überall groß geschrieben an
+// (LCE-Ludwigshafen.de). In der vCard bleibt die Domain bewusst klein.
+function withLowercaseDomain(email: string): string {
+  const at = email.lastIndexOf("@");
+  if (at === -1) return email;
+  return email.slice(0, at + 1) + email.slice(at + 1).toLowerCase();
+}
+
 // Escape a value for a vCard text field (RFC 6350 / 2426).
 function esc(value: string): string {
   return value
@@ -46,7 +54,7 @@ export const GET: APIRoute = ({ props }) => {
     `FN;CHARSET=UTF-8:${esc(data.name)}`,
     `ORG;CHARSET=UTF-8:${esc(ORG)}`,
     `TITLE;CHARSET=UTF-8:${esc(data.role)}`,
-    `EMAIL;TYPE=INTERNET,WORK:${esc(data.email)}`,
+    `EMAIL;TYPE=INTERNET,WORK:${esc(withLowercaseDomain(data.email))}`,
   ];
   if (data.phone) lines.push(`TEL;TYPE=WORK,VOICE:${esc(data.phone)}`);
   if (data.linkedin) lines.push(`URL:${esc(data.linkedin)}`);

@@ -2,7 +2,7 @@
 name: "Rainer Stäb"
 role: "Projektentwicklung"
 department: "Projektentwicklung"
-email: "R.Staeb@lce-ludwigshafen.de"
+email: "R.Staeb@LCE-Ludwigshafen.de"
 phone: "+49 621 5604-233"
 image: "../../assets/images/4_2.png"
 order: 2

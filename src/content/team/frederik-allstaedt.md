@@ -2,7 +2,7 @@
 name: "Dr. Frederik Allstädt"
 role: "Projektentwicklung"
 department: "Projektentwicklung"
-email: "F.Allstaedt@lce-ludwigshafen.de"
+email: "F.Allstaedt@LCE-Ludwigshafen.de"
 phone: "+49 621 5604-275"
 image: "../../assets/images/2_2.png"
 order: 3
