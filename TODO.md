@@ -6,28 +6,20 @@ Interne Übersicht über das, was auf der Website noch fehlt oder vor einem
 
 ## 1. Rechtlich – vor Veröffentlichung zwingend zu klären
 
-**Impressum (`src/pages/impressum.astro`)**
-- [ ] Registergericht + Handelsregisternummer eintragen. *Zur Orientierung:*
-  öffentlich auffindbar unter **Amtsgericht Ludwigshafen am Rhein, HRB 5062**
-  (übereinstimmend bei northdata.de, handelsregister.ai, webvalid.de) –
-  bitte trotzdem an offizieller Stelle (z. B. Handelsregisterauszug)
-  gegenprüfen, bevor es übernommen wird.
-- [ ] Umsatzsteuer-Identifikationsnummer ergänzen.
-- [ ] „Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV" – Name + Anschrift
-  einer natürlichen Person eintragen (gesetzlich vorgeschrieben, aktuell
-  Platzhalter).
-
-**Datenschutzerklärung (`src/pages/datenschutz.astro`)**
-- [ ] Hosting-Anbieter eintragen. *Hinweis:* Aus einem früheren Gespräch wissen
-  wir bereits, dass die Seite über **TWL** gehostet wird (siehe
-  `CPANEL-DEPLOYMENT.md`) – der Platzhalter im Text nennt „TWL" nur als
-  Beispiel, das könnte also direkt final eingetragen werden.
-- [ ] Datenschutzbeauftragte:r ergänzen (falls es eine Person/Stelle gibt).
-- [ ] Zuständige Aufsichtsbehörde mit vollständiger Anschrift/Kontakt ergänzen
-  (voraussichtlich: Der Landesbeauftragte für den Datenschutz und die
-  Informationsfreiheit Rheinland-Pfalz).
-- [ ] Beide Texte sind bewusst als Gerüst markiert und sollten vor Go-Live
-  juristisch geprüft werden (steht auch im Redaktionshinweis auf den Seiten).
+**Impressum (`src/pages/impressum.astro`) und Datenschutzerklärung
+(`src/pages/datenschutz.astro`)** – inzwischen mit den echten Angaben aus dem
+ursprünglichen Webflow-Konzept (`/impressum`, `/datenschutz` auf
+lce-8ece05.webflow.io) befüllt: Handelsregister (Amtsgericht Ludwigshafen am
+Rhein, HRB 5062), USt-IdNr. (DE423982643), Verantwortlich für den Inhalt
+(Sonja Müller-Zaman), Hosting-Anbieter (TWL-KOM) inkl. Server-Logfile-Details,
+keine bestellte Datenschutzbeauftragte Person, zuständige Aufsichtsbehörde
+(Landesbeauftragter für den Datenschutz und die Informationsfreiheit
+Rheinland-Pfalz, Adresse ergänzt). Die Kontaktformular-Beschreibung in der
+Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
+(Name, E-Mail, optional Telefon/Unternehmen, Kategorie, Nachricht).
+- [ ] Trotzdem vor Go-Live einmal juristisch gegenlesen lassen (steht auch im
+  Redaktionshinweis auf beiden Seiten) – insbesondere USt-IdNr. und
+  Handelsregisterdaten an offizieller Stelle gegenprüfen.
 
 ## 2. Team-Einzelseiten – Inhalte
 
