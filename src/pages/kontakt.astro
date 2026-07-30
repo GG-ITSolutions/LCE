@@ -13,6 +13,11 @@ import iconLocation from "../assets/images/3_2.png";
 // "Details"-Feld verwerfen. Bewusst kein HTML-Kommentar im Template und kein
 // sprechender Klassenname, damit die Erkennungslogik nicht im ausgelieferten
 // Seitenquelltext auftaucht.
+//
+// Die `name`-Attribute von Name- und Datenschutz-Feld (Name-des-Anfragenden /
+// Datenschutzzustimmung) sind exakt an das serverseitige kontakt.php
+// angeglichen (dort per $_POST[...] ausgelesen) – nicht umbenennen, ohne das
+// PHP-Skript gegenzuprüfen.
 
 const faqs = [
   {
@@ -55,7 +60,7 @@ const faqs = [
               <input
                 type="text"
                 id="Vor--und-Nachname"
-                name="Vor--und-Nachname"
+                name="Name-des-Anfragenden"
                 placeholder="Max Mustermann"
                 maxlength="256"
                 autocomplete="name"
@@ -117,7 +122,7 @@ const faqs = [
 
             <div class="field field--full">
               <label class="checkbox">
-                <input type="checkbox" id="Datenschutz" name="Datenschutz" required aria-required="true" />
+                <input type="checkbox" id="Datenschutz" name="Datenschutzzustimmung" required aria-required="true" />
                 <span>
                   Ich akzeptiere die <a href={withBase("/datenschutz")}>Datenschutzbestimmungen</a> <span class="req-mark" aria-hidden="true">*</span>. Mit
                   dem Absenden des Formulars stimmen Sie der Verarbeitung Ihrer Angaben zur
@@ -128,6 +133,7 @@ const faqs = [
             </div>
 
             <button type="submit" class="btn btn-primary field--full">Anfrage absenden</button>
+            <p class="kontakt-form__status field--full" role="status" aria-live="polite"></p>
           </div>
         </form>
       </div>
@@ -293,6 +299,30 @@ const faqs = [
   button.btn {
     border: none;
   }
+  /* Rückmeldung nach dem Absenden (per JS befüllt, siehe <script> unten) –
+     ersetzt bewusst die vom PHP-Skript zurückgegebene Seite: kontakt.php
+     liefert bei einer normalen Formular-Navigation die alte Webflow-Seite als
+     "Danke"-Antwort zurück (Altlast des serverseitigen Skripts). Per fetch()
+     werten wir nur den Status-Code aus und zeigen die Rückmeldung im
+     aktuellen Layout. */
+  .kontakt-form__status {
+    margin: 0;
+    padding: 0.9em 1.1em;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .kontakt-form__status:empty {
+    display: none;
+  }
+  .kontakt-form__status--success {
+    background: rgba(161, 173, 70, 0.18);
+    color: #4a5a1e;
+  }
+  .kontakt-form__status--error {
+    background: rgba(179, 38, 30, 0.1);
+    color: #b3261e;
+  }
 
   .kontakt-card h3 {
     margin-bottom: 1.25rem;
@@ -325,3 +355,41 @@ const faqs = [
     margin: 0;
   }
 </style>
+
+<script>
+  // Formular per fetch() senden statt normaler Navigation: kontakt.php
+  // liefert bei einem echten POST/Redirect die alte Webflow-Seite als
+  // Antwort zurück (siehe CSS-Kommentar oben) – das würde nach dem Absenden
+  // die alte Website statt der neuen Seite anzeigen. Wir werten daher nur
+  // den HTTP-Status aus und zeigen die Rückmeldung selbst im neuen Design.
+  const form = document.querySelector<HTMLFormElement>(".kontakt-form");
+  const status = form?.querySelector<HTMLElement>(".kontakt-form__status");
+  const submitBtn = form?.querySelector<HTMLButtonElement>("button[type='submit']");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!status || !submitBtn) return;
+
+    submitBtn.disabled = true;
+    status.textContent = "";
+    status.classList.remove("kontakt-form__status--success", "kontakt-form__status--error");
+
+    try {
+      const response = await fetch(form.action, { method: "POST", body: new FormData(form) });
+      if (response.ok) {
+        status.textContent = "Vielen Dank! Ihre Nachricht wurde erfolgreich versendet.";
+        status.classList.add("kontakt-form__status--success");
+        form.reset();
+      } else {
+        status.textContent =
+          "Ihre Nachricht konnte nicht gesendet werden. Bitte prüfen Sie Ihre Eingaben oder versuchen Sie es später erneut.";
+        status.classList.add("kontakt-form__status--error");
+      }
+    } catch {
+      status.textContent = "Es gab ein Verbindungsproblem. Bitte versuchen Sie es später erneut.";
+      status.classList.add("kontakt-form__status--error");
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
