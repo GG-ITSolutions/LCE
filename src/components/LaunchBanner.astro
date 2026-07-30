@@ -38,10 +38,14 @@ import { withBase } from "../lib/paths";
     border-bottom: 2px solid var(--color-primary);
   }
   .launch-banner__inner {
+    /* --line = Höhe genau einer Textzeile; daran werden Badge und
+       Schließen-Button ausgerichtet, damit beide optisch auf der ersten
+       Zeile sitzen (sonst „schwimmen" sie unterschiedlich hoch). */
+    --line: calc(0.9rem * 1.55);
     position: relative;
     z-index: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: clamp(0.75rem, 2vw, 1.25rem);
     padding-block: 0.8rem;
   }
@@ -49,16 +53,18 @@ import { withBase } from "../lib/paths";
   /* Marken-Badge: helles Oliv mit dunkelblauer Schrift (~5:1, WCAG AA) */
   .launch-banner__badge {
     flex-shrink: 0;
-    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    height: var(--line);
+    padding-inline: 0.7em;
     background: var(--color-primary);
     color: var(--color-secondary);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.3em 0.7em;
     border-radius: 999px;
-    line-height: 1.2;
+    line-height: 1;
   }
 
   /* Farben explizit setzen – die globale p-Regel (gedämpftes Warmgrau)
@@ -102,12 +108,14 @@ import { withBase } from "../lib/paths";
 
   .launch-banner__close {
     flex-shrink: 0;
-    align-self: flex-start;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 1.9rem;
     height: 1.9rem;
+    /* Mitte des Buttons auf die Mitte der ersten Textzeile ziehen
+       (Button ist höher als eine Zeile) */
+    margin-top: calc((var(--line) - 1.9rem) / 2);
     background: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 50%;
@@ -120,11 +128,43 @@ import { withBase } from "../lib/paths";
     transform: rotate(90deg);
   }
 
-  /* Dezentes Einblenden beim Laden */
+  /* Gestaffeltes Einblenden: Balken fährt herunter, danach ploppt das Badge,
+     Text und Schließen-Button folgen versetzt, zuletzt läuft einmal ein
+     Lichtreflex über den Balken. Reines CSS (läuft auch ohne JS einmalig
+     durch und bleibt dank `both` sichtbar); bei Bewegungsreduzierung aus.
+     Wichtig: hier NICHT auf `.js` gaten – Astro scoped Komponenten-CSS, und
+     die `.js`-Klasse sitzt am <html> ohne dieses Scope-Attribut. */
   @media (prefers-reduced-motion: no-preference) {
-    .js .launch-banner {
-      animation: bannerIn 0.5s ease both;
+    .launch-banner {
+      animation: bannerIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+    .launch-banner__badge {
+      animation: badgePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both;
+    }
+    .launch-banner__text {
+      animation: bannerFade 0.5s ease 0.55s both;
+    }
+    .launch-banner__close {
+      animation: bannerFade 0.5s ease 0.7s both;
+    }
+    /* Einmaliger, weicher Lichtreflex über den gesamten Balken */
+    .launch-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        100deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.13) 50%,
+        transparent 65%
+      );
+      background-size: 250% 100%;
+      background-repeat: no-repeat;
+      animation: bannerSheen 1.5s ease-out 0.8s 1 both;
+    }
+
     @keyframes bannerIn {
       from {
         opacity: 0;
@@ -135,11 +175,39 @@ import { withBase } from "../lib/paths";
         transform: none;
       }
     }
+    @keyframes badgePop {
+      from {
+        opacity: 0;
+        transform: scale(0.4);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @keyframes bannerFade {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @keyframes bannerSheen {
+      from {
+        background-position: -120% 0;
+      }
+      to {
+        background-position: 220% 0;
+      }
+    }
   }
 
   @media (max-width: 700px) {
     .launch-banner__inner {
-      align-items: flex-start;
+      --line: calc(0.85rem * 1.55);
       gap: 0.65rem;
     }
     .launch-banner__text {
