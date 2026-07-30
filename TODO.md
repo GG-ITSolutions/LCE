@@ -4,6 +4,28 @@ Interne Übersicht über das, was auf der Website noch fehlt oder vor einem
 öffentlichen Go-Live geprüft/ergänzt werden sollte. Nicht Teil der
 öffentlichen Seite, wird nirgends verlinkt.
 
+## 0. Server-Konflikte (beim Abgleich mit dem echten public_html gefunden)
+
+- [ ] **cPanel-Passwortschutz auf `public_html` ist aktuell aktiv** (sichtbar
+  in der echten `.htaccess`: `AuthType Basic … Require valid-user`, von
+  cPanel unter "Passwortgeschützte Verzeichnisse"/"Directory Privacy"
+  verwaltet). Solange das aktiv ist, verlangt der Server von **jedem**
+  Besucher – auch beim Kontaktformular-Aufruf – einen Login. **Muss vor dem
+  öffentlichen Go-Live in cPanel deaktiviert werden** (nicht per Hand in der
+  `.htaccess`, sondern über die cPanel-Oberfläche, sonst wird die Änderung
+  ggf. wieder überschrieben).
+- [x] **Kontaktformular-Feldnamen stimmten nicht mit `kontakt.php` überein**
+  (`Vor--und-Nachname`/`Datenschutz` statt der von PHP erwarteten
+  `Name-des-Anfragenden`/`Datenschutzzustimmung`) – jede Einsendung wäre
+  serverseitig abgelehnt worden. Behoben (Feldnamen angeglichen, Absenden
+  läuft jetzt per `fetch()`, siehe unten).
+- **`kontakt.html`** (alte Webflow-Datei in `public_html`) **nicht löschen**:
+  `kontakt.php` liest diese Datei synchron als Antwortvorlage
+  (`file_get_contents('../kontakt.html')`). Seit dem `fetch()`-Fix wird diese
+  Antwort im Browser zwar nicht mehr angezeigt, aber ohne die Datei würde das
+  PHP-Skript einen Fehler werfen. Bleibt bis auf Weiteres bestehen (kein
+  Blocker, nur nicht aus Versehen mit aufräumen).
+
 ## 1. Rechtlich – vor Veröffentlichung zwingend zu klären
 
 **Impressum (`src/pages/impressum.astro`) und Datenschutzerklärung
@@ -50,7 +72,9 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
 ## Bereits erledigt (zur Einordnung, nicht mehr offen)
 
 - Kontaktformular: POST an `/formular/kontakt.php`, Honeypot-Feld – geprüft,
-  entspricht der TWL-Vorgabe.
+  entspricht der TWL-Vorgabe. Feldnamen inzwischen mit dem echten
+  `kontakt.php` abgeglichen (siehe Punkt 0), Absenden per `fetch()` statt
+  klassischer Formular-Navigation.
 - Carolins persönliches LinkedIn ist hinterlegt (echtes, verifiziertes Profil).
 - LCE-Unternehmens-LinkedIn ist eine echte, verifizierte URL (kein Platzhalter
   mehr), zentral gepflegt in `src/lib/team.ts`.
