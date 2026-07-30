@@ -54,3 +54,15 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
 - Carolins persönliches LinkedIn ist hinterlegt (echtes, verifiziertes Profil).
 - LCE-Unternehmens-LinkedIn ist eine echte, verifizierte URL (kein Platzhalter
   mehr), zentral gepflegt in `src/lib/team.ts`.
+- **Favicon/Apple-Touch-Icon waren noch der alte Webflow-Platzhalter**
+  (das "W"-Markenzeichen von Webflow selbst, nicht das LCE-Logo) – aus dem
+  echten LCE-Logo neu erzeugt.
+- Ungenutzte Bilder (16 Dateien) und CSS-Utility-Klassen entfernt.
+- `Seo.astro`: falscher Firmenname im `og:site_name` und doppeltes "| LCE"
+  im Seitentitel (auf Seiten, deren Titel "LCE" bereits enthielt) behoben;
+  fehlende OG-/Twitter-Bild-Meta ergänzt.
+- Neu: `llms.txt` für KI-Crawler ergänzt.
+- DSGVO-Audit durchgeführt: Schriftarten sind vollständig selbst gehostet
+  (kein Google-Fonts-CDN), keine Cookies, kein externes Tracking, der einzige
+  externe Link (Google-Maps-Kartenlink auf `/kontakt`) ist ein normaler
+  ausgehender Link (kein eingebettetes iframe) – keine Beanstandungen.
