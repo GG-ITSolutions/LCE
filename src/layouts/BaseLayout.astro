@@ -3,6 +3,7 @@ import Seo from "../components/Seo.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Fonts from "../components/Fonts.astro";
+import LaunchBanner from "../components/LaunchBanner.astro";
 import { withBase } from "../lib/paths";
 import "../styles/global.css";
 
@@ -11,9 +12,10 @@ interface Props {
   description: string;
   image?: string;
   noindex?: boolean;
+  showLaunchBanner?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, showLaunchBanner = false } = Astro.props;
 // The free GitHub Pages preview is a separate, non-canonical copy of the site — it must
 // never get indexed by search engines instead of (or alongside) the real production domain.
 const isPreviewBuild = process.env.DEPLOY_TARGET === "gh-pages";
@@ -62,6 +64,7 @@ const organizationSchema = {
     {!isPreviewBuild && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
   </head>
   <body>
+    {showLaunchBanner && <LaunchBanner />}
     <Header />
     <main id="main">
       <slot />
