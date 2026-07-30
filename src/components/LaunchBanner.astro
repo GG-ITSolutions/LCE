@@ -2,81 +2,154 @@
 import { withBase } from "../lib/paths";
 ---
 
-<div class="launch-banner" id="launch-banner">
+<aside class="launch-banner" id="launch-banner" aria-label="Hinweis zum Website-Start">
   <div class="container launch-banner__inner">
-    <svg class="launch-banner__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="16" x2="12" y2="11" />
-      <line x1="12" y1="8" x2="12.01" y2="8" />
-    </svg>
+    <span class="launch-banner__badge">Neu</span>
+
     <p class="launch-banner__text">
-      Willkommen auf unserer neuen Website – online seit dem 01.08.2026! Vereinzelt können
-      noch Fehler auftreten oder Inhalte sind noch nicht zu 100&nbsp;% geprüft. Entdecken Sie
-      etwas? <a href={withBase("/kontakt")}>Kontaktieren Sie uns</a> gerne – auch über
-      positives Feedback zu unserer neuen Seite freuen wir uns!
+      <strong>Willkommen auf unserer neuen Website</strong> – online seit dem 1.&nbsp;August
+      2026. Vereinzelt können noch Fehler auftreten oder Inhalte noch nicht abschließend
+      geprüft sein.
+      <a class="launch-banner__link" href={withBase("/kontakt")}>
+        Fehler gefunden oder Feedback? Schreiben Sie uns
+        <span aria-hidden="true">→</span>
+      </a>
     </p>
-    <button type="button" class="launch-banner__close" id="launch-banner-close" aria-label="Hinweis schließen">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+    <button
+      type="button"
+      class="launch-banner__close"
+      id="launch-banner-close"
+      aria-label="Hinweis schließen"
+    >
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
     </button>
   </div>
-</div>
+</aside>
 
 <style>
   .launch-banner {
-    background: var(--color-secondary);
-    color: #fff;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(100deg, var(--color-secondary), var(--color-secondary-light));
+    border-bottom: 2px solid var(--color-primary);
   }
   .launch-banner__inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
-    gap: 0.85rem;
-    padding-block: 0.7rem;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    padding-block: 0.8rem;
   }
-  .launch-banner__icon {
+
+  /* Marken-Badge: helles Oliv mit dunkelblauer Schrift (~5:1, WCAG AA) */
+  .launch-banner__badge {
     flex-shrink: 0;
-    color: var(--color-highlight);
+    align-self: flex-start;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3em 0.7em;
+    border-radius: 999px;
+    line-height: 1.2;
   }
+
+  /* Farben explizit setzen – die globale p-Regel (gedämpftes Warmgrau)
+     wäre auf dem dunklen Verlauf praktisch unlesbar. */
   .launch-banner__text {
-    margin: 0;
     flex: 1;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.88);
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.55;
   }
-  .launch-banner__text a {
+  .launch-banner__text strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .launch-banner__link {
+    display: inline-block;
+    margin-left: 0.15rem;
     color: #fff;
     font-weight: 700;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-color: rgba(255, 255, 255, 0.45);
+    text-underline-offset: 3px;
+    white-space: nowrap;
+    transition: color var(--transition), text-decoration-color var(--transition);
   }
-  .launch-banner__text a:hover {
-    color: var(--color-highlight);
+  .launch-banner__link span {
+    display: inline-block;
+    transition: transform var(--transition);
   }
+  /* Beim Hover bleibt die Schrift weiß (durchgehend ~12:1); das Feedback kommt
+     über Unterstrich-Farbe und Pfeil. Oliv als Textfarbe würde am helleren
+     Ende des Verlaufs nur ~3,6:1 erreichen und damit WCAG AA verfehlen. */
+  .launch-banner__link:hover {
+    text-decoration-color: var(--color-primary);
+  }
+  .launch-banner__link:hover span {
+    transform: translateX(3px);
+  }
+
   .launch-banner__close {
     flex-shrink: 0;
+    align-self: flex-start;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: none;
+    width: 1.9rem;
+    height: 1.9rem;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
-    color: rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    color: #fff;
     cursor: pointer;
-    padding: 0.35rem;
-    border-radius: 999px;
-    transition: color var(--transition), background-color var(--transition);
+    transition: background-color var(--transition), transform var(--transition);
   }
   .launch-banner__close:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.24);
+    transform: rotate(90deg);
   }
+
+  /* Dezentes Einblenden beim Laden */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .launch-banner {
+      animation: bannerIn 0.5s ease both;
+    }
+    @keyframes bannerIn {
+      from {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
   @media (max-width: 700px) {
     .launch-banner__inner {
       align-items: flex-start;
+      gap: 0.65rem;
     }
-    .launch-banner__icon {
-      margin-top: 0.15rem;
+    .launch-banner__text {
+      font-size: 0.85rem;
+    }
+    .launch-banner__link {
+      white-space: normal;
+      margin-left: 0;
+      display: block;
+      margin-top: 0.35rem;
     }
   }
 </style>
