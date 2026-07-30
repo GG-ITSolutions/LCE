@@ -72,53 +72,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 /**
- * Injects a message into the HTML source just before the closing </form> tag.
+ * Setzt den HTTP-Status. Der Response-Body wird von der neuen Website nicht
+ * mehr ausgewertet (das Kontaktformular sendet per fetch() und prueft nur
+ * den Status-Code) - fruehere Versionen haben hier die alte kontakt.html
+ * als Antwortvorlage zurueckgegeben; das entfaellt damit.
  */
 function injectMessage($httpResponseCode) {
     http_response_code($httpResponseCode);
-
-    $htmlContent = file_get_contents('../kontakt.html');
-
-    // Replace all relative URLs with absolute URLs
-    $htmlContent = preg_replace_callback(
-        '/(href|src)=(["\'])((?!mailto:|tel:|https?:\/\/)[^"\'>]+)\2/i',
-        function ($matches) {
-            // Ensure the URL is relative and update it with the root URL
-            return $matches[1] . '=' . $matches[2] . '/' . ltrim($matches[3], '/') . $matches[2];
-        },
-        $htmlContent
-    );
-
-    if ($httpResponseCode == 200)
-    {
-        // show kontakt.html with success message
-        $htmlContent = preg_replace_callback(
-            '/<div class="success-message-2 w-form-done"([^>]*)>/i',
-            function ($matches) {
-                return '<div class="success-message-2 w-form-done" ' . $matches[1] . ' style="display:block; border-radius:.5rem;">';
-            },
-            $htmlContent
-        );
-        // hide form if successful
-        $htmlContent = preg_replace_callback(
-            '/<form id="wf-form-Kontaktformular-LCE" ([^>]*)>/i',
-            function ($matches) {
-                return '<form id="wf-form-Kontaktformular-LCE" ' . $matches[1] . ' style="display:none;">';
-            },
-            $htmlContent
-        );
-    } else {
-        // show kontakt.html with error message
-        $htmlContent = preg_replace_callback(
-            '/<div class="error-message-2 w-form-fail"([^>]*)>/i',
-            function ($matches) {
-                return '<div class="error-message-2 w-form-fail" ' . $matches[1] . ' style="display:block; border-radius:.5rem; margin-top:1em;">';
-            },
-            $htmlContent
-        );
-    }
-
-    return $htmlContent;
+    return '';
 }
 
 /**
