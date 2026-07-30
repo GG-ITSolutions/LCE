@@ -8,8 +8,10 @@ interface Props {
 
 const { title, description, image, noindex = false } = Astro.props;
 
-const siteName = "LCE – Ludwigshafener Cité Entwicklungsgesellschaft";
-const fullTitle = title === siteName ? title : `${title} | LCE`;
+const siteName = "LU-City Entwicklungs-GmbH (LCE)";
+// Nur anhängen, wenn der Seitentitel die Marke nicht schon selbst nennt
+// (sonst z. B. "Über die LCE | LCE" auf Seiten, deren Titel bereits "LCE" enthält).
+const fullTitle = title.includes("LCE") ? title : `${title} | LCE`;
 // Astro.url.pathname includes the build's `base` prefix (e.g. "/LCE" on the GitHub Pages
 // preview); strip it so the canonical/OG URL always describes the real production path,
 // never a mix of the preview's subpath and the production domain.
@@ -34,9 +36,13 @@ const ogImage = new URL(image ?? "og-image.jpg", Astro.site);
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={description} />
 <meta property="og:locale" content="de_DE" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={description} />
