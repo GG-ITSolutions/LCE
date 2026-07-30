@@ -53,7 +53,9 @@ Mit den von TWL bereitgestellten FTP-Zugangsdaten und einem Client wie FileZilla
 
 ## 5. Wichtiger Hinweis: `/formular/kontakt.php`
 
-Das Kontaktformular sendet per `POST` an `/formular/kontakt.php`. Dieses PHP-Skript ist **nicht** Teil dieses Repos – es wird separat von TWL bereitgestellt/gepflegt und muss auf dem Server bereits unter genau diesem Pfad liegen. Ohne dieses Skript läuft das Formular ins Leere (404 beim Absenden).
+Das Kontaktformular sendet per `POST` an `/formular/kontakt.php`. Dieses PHP-Skript wird **nicht** von `npm run build` erzeugt und landet **nicht** in `dist/` – es muss weiterhin separat (per FTP/Dateimanager) direkt unter `public_html/formular/kontakt.php` gepflegt werden, unabhängig vom normalen Website-Deployment.
+
+Eine Kopie des aktuellen Stands liegt zur Nachvollziehbarkeit im Repo unter [`server-formular/kontakt.php`](server-formular/kontakt.php) (siehe `server-formular/README.md`) – das ist aber nur eine Referenz-Kopie zur Versionierung, kein Teil des Astro-Builds. Die zugehörige `mail_config.php` (enthält die echten SMTP-Zugangsdaten) ist bewusst **nicht** im Repo.
 
 Nach dem Go-Live einmal testweise das Formular ausfüllen und abschicken, um den kompletten Weg (Formular → `kontakt.php` → E-Mail-Zustellung) zu prüfen.
 
