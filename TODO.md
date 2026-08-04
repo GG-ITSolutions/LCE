@@ -56,14 +56,9 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
   Kurztext ersetzt werden.
 - [x] **Sonja Müller-Zaman** hat jetzt (Telefon + E-Mail geliefert) eine
   eigene Profilseite/vCard wie die anderen vier Teammitglieder.
-- [ ] **Zwei persönliche LinkedIn-URLs stehen noch aus** (Dr. Frederik
-  Allstädt, Sonja Müller-Zaman): Beide wurden nur als Link-**Titel**
-  übermittelt ("Dr. Frederik Allstädt | LinkedIn" bzw. "Sonja Müller-Zaman |
-  LinkedIn"), die eigentliche Profil-URL ist beim Kopieren/Einfügen
-  verloren gegangen. Bitte die echte Adresse aus der Browser-Adresszeile des
-  jeweiligen LinkedIn-Profils schicken (z. B.
-  `https://www.linkedin.com/in/...`), dann trage ich sie in
-  `src/content/team/frederik-allstaedt.md` bzw. `sonja-mueller-zaman.md` ein.
+- [x] Persönliche LinkedIn-Profile für Dr. Frederik Allstädt und Sonja
+  Müller-Zaman ergänzt (echte URLs nachgereicht, nachdem der erste Versuch
+  nur den Link-Titel ohne die eigentliche Adresse übermittelt hatte).
 
 ## 3. Sonstiges / nice-to-have (kein Blocker)
 
