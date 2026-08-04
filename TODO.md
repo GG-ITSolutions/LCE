@@ -46,18 +46,24 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
 ## 2. Team-Einzelseiten – Inhalte
 
 - [ ] **Individuelle Vorstellungstexte schreiben.** Die Kurzbios von
-  Frederik Verst, Dr. Frederik Allstädt und Rainer Stäb sind aktuell
-  **wortgleiche Platzhaltersätze** (copy-paste desselben Satzbausteins,
-  nur der Name ausgetauscht). Diese sollten durch echte, individuelle
-  Texte ersetzt werden, die zur jeweiligen Person und Rolle passen – nicht
-  drei identische Sätze.
+  Frederik Verst, Dr. Frederik Allstädt, Rainer Stäb und jetzt auch Sonja
+  Müller-Zaman sind aktuell **Platzhaltersätze** (Frederik/Allstädt/Stäb
+  sogar wortgleich, nur der Name ausgetauscht). Diese sollten durch echte,
+  individuelle Texte ersetzt werden, die zur jeweiligen Person und Rolle
+  passen.
 - [ ] Auch Carolin Köhlers Bio-Text auf `/team/carolin-koehler` ist noch ein
   generischer Platzhalter und sollte durch einen echten, persönlichen
   Kurztext ersetzt werden.
-- [ ] **Sonja Müller-Zaman** hat aktuell (bewusste Entscheidung) keine eigene
-  Profilseite/vCard, im Gegensatz zu den anderen vier Teammitgliedern.
-  Falls gewünscht, kann für sie ebenfalls eine Profilseite + vCard angelegt
-  werden (Telefon/LinkedIn müssten dafür noch geliefert werden).
+- [x] **Sonja Müller-Zaman** hat jetzt (Telefon + E-Mail geliefert) eine
+  eigene Profilseite/vCard wie die anderen vier Teammitglieder.
+- [ ] **Zwei persönliche LinkedIn-URLs stehen noch aus** (Dr. Frederik
+  Allstädt, Sonja Müller-Zaman): Beide wurden nur als Link-**Titel**
+  übermittelt ("Dr. Frederik Allstädt | LinkedIn" bzw. "Sonja Müller-Zaman |
+  LinkedIn"), die eigentliche Profil-URL ist beim Kopieren/Einfügen
+  verloren gegangen. Bitte die echte Adresse aus der Browser-Adresszeile des
+  jeweiligen LinkedIn-Profils schicken (z. B.
+  `https://www.linkedin.com/in/...`), dann trage ich sie in
+  `src/content/team/frederik-allstaedt.md` bzw. `sonja-mueller-zaman.md` ein.
 
 ## 3. Sonstiges / nice-to-have (kein Blocker)
 
@@ -90,3 +96,9 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
   (kein Google-Fonts-CDN), keine Cookies, kein externes Tracking, der einzige
   externe Link (Google-Maps-Kartenlink auf `/kontakt`) ist ein normaler
   ausgehender Link (kein eingebettetes iframe) – keine Beanstandungen.
+- Bildnachweis ergänzt: dezenter nummerierter Hinweis direkt an Fotos/
+  Grafiken, vollständige Zuordnung im neuen Abschnitt "Bildnachweis" im
+  Impressum (13 Einträge).
+- `kontakt.php`: liest jetzt auch Telefon/Unternehmen/Kategorie aus (vorher
+  stillschweigend ignoriert) und verschickt eine formatierte HTML-Mail statt
+  einer reinen Textzeile.
