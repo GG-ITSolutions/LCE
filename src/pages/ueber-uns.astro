@@ -78,6 +78,15 @@ const history = [
 ];
 
 const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.order);
+
+// Bildnachweis-Nummern der Team-Einzelporträts (siehe Bildverzeichnis auf /impressum)
+const teamImageCredit: Record<string, number> = {
+  "sonja-mueller-zaman": 5,
+  "rainer-staeb": 6,
+  "frederik-allstaedt": 7,
+  "frederik-verst": 8,
+  "carolin-koehler": 9,
+};
 ---
 
 <BaseLayout
@@ -111,6 +120,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
           fetchpriority="high"
           class="hero__image"
         />
+        <span class="img-credit" title="Rouven Zaman, GAG">Bild 4</span>
       </div>
     </div>
   </section>
@@ -182,6 +192,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
                 <Wrapper class="team-card__image" {...wrapperProps}>
                   <Image src={member.data.image} alt={member.data.name} widths={[250, 380, 500]} sizes="(max-width: 560px) 90vw, 360px" quality={88} />
                   <span class="team-card__badge">{member.data.department}</span>
+                  <span class="img-credit" title="Rouven Zaman, GAG">Bild {teamImageCredit[member.slug]}</span>
                 </Wrapper>
                 <h3>
                   {member.data.hasProfile ? (
@@ -203,6 +214,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     <div class="container testimonial">
       <div class="testimonial__image">
         <Image src={sonjaImage} alt="Sonja Müller-Zaman, Geschäftsführerin der LCE" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
+        <span class="img-credit" title="Rouven Zaman, GAG">Bild 10</span>
       </div>
       <div>
         <p class="eyebrow">Wer steht hinter der LCE?</p>
@@ -233,6 +245,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
       </div>
       <div class="testimonial__image">
         <Image src={blettnerPortrait} alt="Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
+        <span class="img-credit" title="Stadt Ludwigshafen am Rhein">Bild 11</span>
       </div>
     </div>
   </section>
@@ -241,6 +254,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     <div class="container testimonial">
       <div class="testimonial__image">
         <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
+        <span class="img-credit" title="GAG Ludwigshafen">Bild 12</span>
       </div>
       <div>
         <Image src={gagLogo} alt="Logo der GAG Ludwigshafen" width={220} height={70} class="testimonial__logo" />
@@ -493,6 +507,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
     order: 2;
   }
   .testimonial__image {
+    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-card);

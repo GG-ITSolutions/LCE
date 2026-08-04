@@ -62,6 +62,7 @@ const kennzahlen = [
           loading="eager"
           fetchpriority="high"
         />
+        <span class="img-credit" title="ADEPT 2026">Bild 1</span>
       </div>
     </div>
   </section>
@@ -85,12 +86,14 @@ const kennzahlen = [
         </div>
         <div class="overview__image">
           <Image src={teamImage} alt="Das LCE-Team bespricht das Städtebaumodell der Zukunftsquartiere" widths={[640, 960, 1280]} sizes="(max-width: 767px) 92vw, 48vw" quality={88} />
+          <span class="img-credit" title="Rouven Zaman, GAG">Bild 2</span>
         </div>
       </div>
 
       <div class="overview__row overview__row--reverse" data-reveal>
         <div class="overview__image">
           <Image src={karteImage} alt="Lageplan mit dem hervorgehobenen Entwicklungsgebiet der Zukunftsquartiere entlang der Helmut-Kohl-Allee (Quelle: Stadtverwaltung Ludwigshafen am Rhein)" widths={[640, 960, 1280]} sizes="(max-width: 767px) 92vw, 48vw" quality={90} />
+          <span class="img-credit" title="Stadtverwaltung Ludwigshafen am Rhein">Bild 3</span>
         </div>
         <div class="overview__text">
           <h3>Zukunftsquartiere an der Helmut-Kohl-Allee</h3>
@@ -200,6 +203,7 @@ const kennzahlen = [
     margin-bottom: 0;
   }
   .overview__image {
+    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-card);

@@ -467,6 +467,24 @@ select:focus-visible,
   }
 }
 
+/* ---------- Bildnachweis (kurzer Hinweis direkt am Bild) ----------
+   Vollständiger Nachweis im Bildverzeichnis auf der Impressum-Seite, über die
+   Nummer zuordenbar. Der Elternwrapper des Bildes braucht `position: relative`. */
+.img-credit {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 2;
+  padding: 0.15em 0.6em;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  line-height: 1.6;
+}
+
 /* ---------- Visually hidden (for honeypot + skip-friendly labels) ---------- */
 .visually-hidden {
   position: absolute !important;
