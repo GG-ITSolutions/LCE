@@ -78,15 +78,6 @@ const history = [
 ];
 
 const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.order);
-
-// Bildnachweis-Nummern der Team-Einzelporträts (siehe Bildverzeichnis auf /impressum)
-const teamImageCredit: Record<string, number> = {
-  "sonja-mueller-zaman": 5,
-  "rainer-staeb": 6,
-  "frederik-allstaedt": 7,
-  "frederik-verst": 8,
-  "carolin-koehler": 9,
-};
 ---
 
 <BaseLayout
@@ -120,7 +111,6 @@ const teamImageCredit: Record<string, number> = {
           fetchpriority="high"
           class="hero__image"
         />
-        <span class="img-credit" title="Rouven Zaman, GAG">Bild 4</span>
       </div>
     </div>
   </section>
@@ -192,7 +182,6 @@ const teamImageCredit: Record<string, number> = {
                 <Wrapper class="team-card__image" {...wrapperProps}>
                   <Image src={member.data.image} alt={member.data.name} widths={[250, 380, 500]} sizes="(max-width: 560px) 90vw, 360px" quality={88} />
                   <span class="team-card__badge">{member.data.department}</span>
-                  <span class="img-credit" title="Rouven Zaman, GAG">Bild {teamImageCredit[member.slug]}</span>
                 </Wrapper>
                 <h3>
                   {member.data.hasProfile ? (
@@ -214,7 +203,6 @@ const teamImageCredit: Record<string, number> = {
     <div class="container testimonial">
       <div class="testimonial__image">
         <Image src={sonjaImage} alt="Sonja Müller-Zaman, Geschäftsführerin der LCE" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
-        <span class="img-credit" title="Rouven Zaman, GAG">Bild 10</span>
       </div>
       <div>
         <p class="eyebrow">Wer steht hinter der LCE?</p>
@@ -243,18 +231,22 @@ const teamImageCredit: Record<string, number> = {
         </blockquote>
         <p class="testimonial__name">Prof. Dr. Klaus Blettner<br /><span>Oberbürgermeister der Stadt Ludwigshafen</span></p>
       </div>
-      <div class="testimonial__image">
-        <Image src={blettnerPortrait} alt="Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
-        <span class="img-credit" title="Stadt Ludwigshafen am Rhein">Bild 11</span>
+      <div class="testimonial__image-cell">
+        <div class="testimonial__image">
+          <Image src={blettnerPortrait} alt="Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
+        </div>
+        <p class="img-caption">Bild 11 · Von der Stadt Ludwigshafen am Rhein zur Verfügung gestellt</p>
       </div>
     </div>
   </section>
 
   <section class="section section-muted" data-reveal>
     <div class="container testimonial">
-      <div class="testimonial__image">
-        <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
-        <span class="img-credit" title="GAG Ludwigshafen">Bild 12</span>
+      <div class="testimonial__image-cell">
+        <div class="testimonial__image">
+          <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
+        </div>
+        <p class="img-caption">Bild 12 · Von der GAG Ludwigshafen zur Verfügung gestellt</p>
       </div>
       <div>
         <Image src={gagLogo} alt="Logo der GAG Ludwigshafen" width={220} height={70} class="testimonial__logo" />
@@ -503,11 +495,11 @@ const teamImageCredit: Record<string, number> = {
   .testimonial--reverse > div:first-child {
     order: 1;
   }
-  .testimonial--reverse .testimonial__image {
+  .testimonial--reverse .testimonial__image,
+  .testimonial--reverse .testimonial__image-cell {
     order: 2;
   }
   .testimonial__image {
-    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-card);
@@ -592,10 +584,12 @@ const teamImageCredit: Record<string, number> = {
       grid-template-columns: 1fr;
     }
     .testimonial--reverse > div:first-child,
-    .testimonial--reverse .testimonial__image {
+    .testimonial--reverse .testimonial__image,
+    .testimonial--reverse .testimonial__image-cell {
       order: initial;
     }
-    .testimonial__image {
+    .testimonial__image,
+    .testimonial__image-cell {
       order: -1;
     }
     .testimonial__image :global(img) {
