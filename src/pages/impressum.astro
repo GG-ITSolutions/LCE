@@ -52,73 +52,58 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         der Vollständigkeit halber mit aufgeführt, tragen aber bewusst keinen Hinweis am Bild
         selbst.
       </p>
-      <ol class="bildnachweis">
-        <li>
-          Startseite – Hero-Bild (3D-Visualisierung der Zukunftsquartiere); erscheint zusätzlich
-          bei den Zukunftsquartieren als Darstellung des Zielkonzepts.<br />
+      <ul class="bildnachweis">
+        <li id="bild-1">
+          <strong>Bild 1</strong> – Startseite – Hero-Bild (3D-Visualisierung der
+          Zukunftsquartiere); erscheint zusätzlich bei den Zukunftsquartieren als Darstellung
+          des Zielkonzepts.<br />
           Darstellung: ADEPT, 2026.
         </li>
-        <li>
-          Startseite – „Das LCE-Team bespricht das Städtebaumodell der Zukunftsquartiere".<br />
+        <li id="bild-2">
+          <strong>Bild 2</strong> – Startseite – „Das LCE-Team bespricht das Städtebaumodell der
+          Zukunftsquartiere".<br />
           Foto: Rouven Zaman, GAG.
         </li>
-        <li>
-          Startseite und Zukunftsquartiere (Hero) – Lageplan mit dem hervorgehobenen
-          Entwicklungsgebiet entlang der Helmut-Kohl-Allee.<br />
+        <li id="bild-3">
+          <strong>Bild 3</strong> – Startseite und Zukunftsquartiere (Hero) – Lageplan mit dem
+          hervorgehobenen Entwicklungsgebiet entlang der Helmut-Kohl-Allee.<br />
           Darstellung auf Grundlage der Stadtgrundkarte, veröffentlicht mit Erlaubnis der
           Stadtverwaltung Ludwigshafen am Rhein, Bereich Geoinformation, Vermessung und
           Stadterneuerung. Basiskarte: Liegenschaftskarte der Vermessungs- und
           Katasterverwaltung.
         </li>
-        <li>
-          Über uns – Hero-Bild „Das LCE-Team im Gespräch am Städtebaumodell der
-          Zukunftsquartiere".<br />
+        <li id="bild-4">
+          <strong>Bild 4</strong> – Über uns – Hero-Bild „Das LCE-Team im Gespräch am
+          Städtebaumodell der Zukunftsquartiere".<br />
           Foto: Rouven Zaman, GAG.
         </li>
-        <li>
-          Über uns – Team-Einzelporträt Sonja Müller-Zaman (Team-Übersicht, auch auf ihrer
-          Profilseite).<br />
+        <li id="bild-5-9">
+          <strong>Bild 5–9</strong> – Über uns – Team-Einzelporträts (Sonja Müller-Zaman, Rainer
+          Stäb, Dr. Frederik Allstädt, Frederik Verst, Carolin Köhler) auf der Team-Übersicht
+          und den jeweiligen Profilseiten.<br />
           Foto: Rouven Zaman, GAG.
         </li>
-        <li>
-          Über uns – Team-Einzelporträt Rainer Stäb (Team-Übersicht, auch auf seiner
-          Profilseite).<br />
+        <li id="bild-10">
+          <strong>Bild 10</strong> – Über uns – Porträt Sonja Müller-Zaman im Abschnitt
+          „Gesellschafter &amp; Geschäftsführung".<br />
           Foto: Rouven Zaman, GAG.
         </li>
-        <li>
-          Über uns – Team-Einzelporträt Dr. Frederik Allstädt (Team-Übersicht, auch auf seiner
-          Profilseite).<br />
-          Foto: Rouven Zaman, GAG.
-        </li>
-        <li>
-          Über uns – Team-Einzelporträt Frederik Verst (Team-Übersicht, auch auf seiner
-          Profilseite).<br />
-          Foto: Rouven Zaman, GAG.
-        </li>
-        <li>
-          Über uns – Team-Einzelporträt Carolin Köhler (Team-Übersicht, auch auf ihrer
-          Profilseite).<br />
-          Foto: Rouven Zaman, GAG.
-        </li>
-        <li>
-          Über uns – Porträt Sonja Müller-Zaman im Abschnitt „Gesellschafter &amp;
-          Geschäftsführung".<br />
-          Foto: Rouven Zaman, GAG.
-        </li>
-        <li>
-          Über uns – Porträt Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt
-          Ludwigshafen.<br />
+        <li id="bild-11">
+          <strong>Bild 11</strong> – Über uns – Porträt Prof. Dr. Klaus Blettner,
+          Oberbürgermeister der Stadt Ludwigshafen.<br />
           Von der Stadt Ludwigshafen am Rhein zur Verfügung gestellt.
         </li>
-        <li>
-          Über uns – Porträt Wolfgang van Vliet, Vorstand der GAG Ludwigshafen.<br />
+        <li id="bild-12">
+          <strong>Bild 12</strong> – Über uns – Porträt Wolfgang van Vliet, Vorstand der GAG
+          Ludwigshafen.<br />
           Von der GAG Ludwigshafen zur Verfügung gestellt.
         </li>
-        <li>
-          Zukunftsquartiere – Foto zum Abschnitt „Vom Werkstattverfahren zur Rahmenplanung".<br />
+        <li id="bild-13">
+          <strong>Bild 13</strong> – Zukunftsquartiere – Foto zum Abschnitt „Vom
+          Werkstattverfahren zur Rahmenplanung".<br />
           © Stadt Ludwigshafen/Martin Hartmann.
         </li>
-      </ol>
+      </ul>
 
       <h2>EU-Streitschlichtung</h2>
       <p>
@@ -145,12 +130,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     font-size: 1.25rem;
   }
   .bildnachweis {
-    padding-left: 1.25rem;
+    list-style: none;
+    padding-left: 0;
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
   }
   .bildnachweis li {
     padding-left: 0.25rem;
+    scroll-margin-top: 6rem;
+  }
+  /* Kurze Hervorhebung des Eintrags, zu dem von einem "Bild N"-Link gesprungen wurde */
+  .bildnachweis li:target {
+    background: rgba(161, 173, 70, 0.15);
+    border-radius: var(--radius-md);
+    padding: 0.4rem 0.6rem;
+    margin-left: -0.6rem;
   }
 </style>

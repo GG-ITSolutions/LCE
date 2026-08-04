@@ -235,7 +235,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
         <div class="testimonial__image">
           <Image src={blettnerPortrait} alt="Prof. Dr. Klaus Blettner, Oberbürgermeister der Stadt Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
         </div>
-        <p class="img-caption">Bild 11 · Von der Stadt Ludwigshafen am Rhein zur Verfügung gestellt</p>
+        <p class="img-caption"><a href={withBase("/impressum") + "#bild-11"}>Bild 11</a> · Von der Stadt Ludwigshafen am Rhein zur Verfügung gestellt</p>
       </div>
     </div>
   </section>
@@ -246,7 +246,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
         <div class="testimonial__image">
           <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
         </div>
-        <p class="img-caption">Bild 12 · Von der GAG Ludwigshafen zur Verfügung gestellt</p>
+        <p class="img-caption"><a href={withBase("/impressum") + "#bild-12"}>Bild 12</a> · Von der GAG Ludwigshafen zur Verfügung gestellt</p>
       </div>
       <div>
         <Image src={gagLogo} alt="Logo der GAG Ludwigshafen" width={220} height={70} class="testimonial__logo" />
