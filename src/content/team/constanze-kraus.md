@@ -5,6 +5,7 @@ department: "Unternehmenssteuerung"
 email: "C.Kraus@LCE-Ludwigshafen.de"
 phone: "+49 621 5604-224"
 mobile: "+49 173 6770004"
+linkedin: "https://www.linkedin.com/in/constanze-kraus-91bb11169/"
 image: "../../assets/images/Constanze-Kraus.png"
 order: 2
 hasProfile: true
