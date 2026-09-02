@@ -5,7 +5,7 @@ import { withBase } from "../lib/paths";
 import { FOUNDING_YEAR } from "../lib/company";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import heroImage from "../assets/images/Team-Staedtebaumodell.jpg";
+import heroImage from "../assets/images/InfoMarkt-Staedtebaumodell-1132.jpg";
 import iconMission from "../assets/images/1.png";
 import iconGanzheitlich from "../assets/images/2.png";
 import iconPlanungssicher from "../assets/images/3.png";
@@ -102,7 +102,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
         <div class="hero__glow" aria-hidden="true"></div>
         <Image
           src={heroImage}
-          alt="Das LCE-Team im Gespräch am Städtebaumodell der Zukunftsquartiere"
+          alt="Besucher betrachten das Städtebaumodell der Zukunftsquartiere beim Info-Markt"
           widths={[640, 960, 1280, 1600]}
           sizes="(max-width: 767px) 92vw, 48vw"
           quality={88}
