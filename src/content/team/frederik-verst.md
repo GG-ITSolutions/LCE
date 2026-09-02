@@ -6,7 +6,7 @@ email: "F.Verst@LCE-Ludwigshafen.de"
 phone: "+49 621 5604-247"
 linkedin: "https://de.linkedin.com/in/frederik-verst-1774b2179"
 image: "../../assets/images/Design-ohne-Titel-29.png"
-order: 4
+order: 5
 hasProfile: true
 ---
 

@@ -10,7 +10,6 @@ import iconMission from "../assets/images/1.png";
 import iconGanzheitlich from "../assets/images/2.png";
 import iconPlanungssicher from "../assets/images/3.png";
 import iconUmsetzung from "../assets/images/4.png";
-import sonjaImage from "../assets/images/Sonja-2.png";
 import stadtLogo from "../assets/images/Wortmarke-Ludwigshafen.jpg";
 import gagLogo from "../assets/images/Design-ohne-Titel-25.png";
 import blettnerPortrait from "../assets/images/2_4.png";
@@ -200,21 +199,20 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   </section>
 
   <section class="section section-muted" data-reveal>
-    <div class="container testimonial">
-      <div class="testimonial__image">
-        <Image src={sonjaImage} alt="Sonja Müller-Zaman, Geschäftsführerin der LCE" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
-      </div>
-      <div>
-        <p class="eyebrow">Wer steht hinter der LCE?</p>
-        <h2>Gesellschafter &amp; Geschäftsführung</h2>
-        <p>
+    <div class="container">
+      <SectionHeader
+        eyebrow="Wer steht hinter der LCE?"
+        title="Gesellschafter &amp; Geschäftsführung"
+        align="left"
+        class="gesellschafter"
+      >
+        <p class="lead">
           Die LCE ist eine gemeinsame Gesellschaft der Stadt Ludwigshafen und der GAG
           Ludwigshafen. Den Vorsitz des Aufsichtsrats führt der Oberbürgermeister der Stadt
-          Ludwigshafen, Prof. Dr. Klaus Blettner. Geschäftsführerin der LCE ist Sonja
-          Müller-Zaman.
+          Ludwigshafen, Prof. Dr. Klaus Blettner. Geschäftsführer der LCE ist Wolfgang
+          van Vliet.
         </p>
-        <p class="testimonial__name">Sonja Müller-Zaman<br /><span>Geschäftsführung der LCE</span></p>
-      </div>
+      </SectionHeader>
     </div>
   </section>
 
@@ -246,7 +244,7 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
         <div class="testimonial__image">
           <Image src={vanVlietPortrait} alt="Wolfgang van Vliet, Vorstand der GAG Ludwigshafen" widths={[560, 840, 1120]} sizes="(max-width: 767px) 92vw, 40vw" quality={88} />
         </div>
-        <p class="img-caption"><a href={withBase("/impressum") + "#bild-12"}>Bild 12</a> · Von der GAG Ludwigshafen zur Verfügung gestellt</p>
+        <p class="img-caption"><a href={withBase("/impressum") + "#bild-9"}>Bild 9</a> · Conrad Gös</p>
       </div>
       <div>
         <Image src={gagLogo} alt="Logo der GAG Ludwigshafen" width={220} height={70} class="testimonial__logo" />
@@ -481,6 +479,12 @@ const team = (await getCollection("team")).sort((a, b) => a.data.order - b.data.
   .team-card__mail {
     font-size: 0.9rem;
     word-break: break-word;
+  }
+
+  /* Reiner Textabschnitt (kein Bild daneben) – der Standard-Abstand des
+     Section-Headers würde hier unten zu viel Luft lassen. */
+  .gesellschafter {
+    margin-bottom: 0;
   }
 
   .testimonial {

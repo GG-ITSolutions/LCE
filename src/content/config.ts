@@ -9,6 +9,7 @@ const team = defineCollection({
       department: z.string(),
       email: z.string().email(),
       phone: z.string().optional(),
+      mobile: z.string().optional(),
       linkedin: z.string().url().optional(),
       image: image(),
       order: z.number(),

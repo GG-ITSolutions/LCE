@@ -20,6 +20,12 @@ function esc(value: string): string {
     .replace(/,/g, "\\,")
     .replace(/;/g, "\\;");
 }
+// Namenszusätze, die zum Nachnamen gehören (niederländisch/deutsch/romanisch).
+const NAME_PARTICLES = new Set([
+  "van", "von", "vom", "zu", "zum", "zur", "de", "del", "della", "der", "den",
+  "des", "di", "da", "dos", "du", "la", "le", "ten", "ter",
+]);
+
 const ADR = {
   street: "Mundenheimer Str. 182",
   city: "Ludwigshafen am Rhein",
@@ -39,9 +45,13 @@ export const GET: APIRoute = ({ props }) => {
   const { data } = props.member as { data: Record<string, string> };
 
   // Split "Vorname(n) Nachname" → N:Nachname;Vorname
+  // Namenszusätze ("van Vliet", "von der Heide") gehören zum Nachnamen: ab dem
+  // ersten Zusatz zählt alles zum Nachnamen, sonst greift das letzte Wort.
   const parts = data.name.trim().split(/\s+/);
-  const last = parts.length > 1 ? parts.pop()! : "";
-  const first = parts.join(" ");
+  const particleIndex = parts.findIndex((part, i) => i > 0 && NAME_PARTICLES.has(part.toLowerCase()));
+  const splitAt = particleIndex === -1 ? parts.length - 1 : particleIndex;
+  const last = parts.length > 1 ? parts.slice(splitAt).join(" ") : "";
+  const first = parts.slice(0, splitAt).join(" ");
 
   // CHARSET=UTF-8 an den Textfeldern: Hinweis für Outlook, damit Umlaute
   // korrekt gelesen werden (KEIN BOM – ein BOM vor BEGIN:VCARD macht die
@@ -57,6 +67,7 @@ export const GET: APIRoute = ({ props }) => {
     `EMAIL;TYPE=INTERNET,WORK:${esc(withLowercaseDomain(data.email))}`,
   ];
   if (data.phone) lines.push(`TEL;TYPE=WORK,VOICE:${esc(data.phone)}`);
+  if (data.mobile) lines.push(`TEL;TYPE=CELL,VOICE:${esc(data.mobile)}`);
   if (data.linkedin) lines.push(`URL:${esc(data.linkedin)}`);
   // LCE-Unternehmens-LinkedIn (bei allen Mitgliedern gleich)
   lines.push(`URL:${esc(COMPANY_LINKEDIN)}`);

@@ -19,12 +19,11 @@ Interne Übersicht über das, was auf der Website noch fehlt oder vor einem
   `Name-des-Anfragenden`/`Datenschutzzustimmung`) – jede Einsendung wäre
   serverseitig abgelehnt worden. Behoben (Feldnamen angeglichen, Absenden
   läuft jetzt per `fetch()`, siehe unten).
-- **`kontakt.html`** (alte Webflow-Datei in `public_html`) **nicht löschen**:
-  `kontakt.php` liest diese Datei synchron als Antwortvorlage
-  (`file_get_contents('../kontakt.html')`). Seit dem `fetch()`-Fix wird diese
-  Antwort im Browser zwar nicht mehr angezeigt, aber ohne die Datei würde das
-  PHP-Skript einen Fehler werfen. Bleibt bis auf Weiteres bestehen (kein
-  Blocker, nur nicht aus Versehen mit aufräumen).
+- [x] **`kontakt.html`-Abhängigkeit aufgelöst**: `kontakt.php` hat die alte
+  Webflow-Datei früher als Antwortvorlage gelesen
+  (`file_get_contents('../kontakt.html')`). Die Funktion `injectMessage()`
+  setzt inzwischen nur noch den HTTP-Status, daher konnten die alten
+  Webflow-Dateien inkl. `kontakt.html` gelöscht werden.
 
 ## 1. Rechtlich – vor Veröffentlichung zwingend zu klären
 
@@ -33,7 +32,7 @@ Interne Übersicht über das, was auf der Website noch fehlt oder vor einem
 ursprünglichen Webflow-Konzept (`/impressum`, `/datenschutz` auf
 lce-8ece05.webflow.io) befüllt: Handelsregister (Amtsgericht Ludwigshafen am
 Rhein, HRB 5062), USt-IdNr. (DE423982643), Verantwortlich für den Inhalt
-(Sonja Müller-Zaman), Hosting-Anbieter (TWL-KOM) inkl. Server-Logfile-Details,
+(Wolfgang van Vliet), Hosting-Anbieter (TWL-KOM) inkl. Server-Logfile-Details,
 keine bestellte Datenschutzbeauftragte Person, zuständige Aufsichtsbehörde
 (Landesbeauftragter für den Datenschutz und die Informationsfreiheit
 Rheinland-Pfalz, Adresse ergänzt). Die Kontaktformular-Beschreibung in der
@@ -45,20 +44,23 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
 
 ## 2. Team-Einzelseiten – Inhalte
 
-- [ ] **Individuelle Vorstellungstexte schreiben.** Die Kurzbios von
-  Frederik Verst, Dr. Frederik Allstädt, Rainer Stäb und jetzt auch Sonja
-  Müller-Zaman sind aktuell **Platzhaltersätze** (Frederik/Allstädt/Stäb
-  sogar wortgleich, nur der Name ausgetauscht). Diese sollten durch echte,
-  individuelle Texte ersetzt werden, die zur jeweiligen Person und Rolle
-  passen.
-- [ ] Auch Carolin Köhlers Bio-Text auf `/team/carolin-koehler` ist noch ein
-  generischer Platzhalter und sollte durch einen echten, persönlichen
-  Kurztext ersetzt werden.
-- [x] **Sonja Müller-Zaman** hat jetzt (Telefon + E-Mail geliefert) eine
-  eigene Profilseite/vCard wie die anderen vier Teammitglieder.
-- [x] Persönliche LinkedIn-Profile für Dr. Frederik Allstädt und Sonja
-  Müller-Zaman ergänzt (echte URLs nachgereicht, nachdem der erste Versuch
-  nur den Link-Titel ohne die eigentliche Adresse übermittelt hatte).
+- [ ] **Individuelle Vorstellungstexte schreiben.** Die Kurzbios **aller**
+  Teammitglieder (Wolfgang van Vliet, Constanze Kraus, Rainer Stäb,
+  Dr. Frederik Allstädt, Frederik Verst, Carolin Köhler) sind aktuell
+  **Platzhaltersätze** – bei Stäb/Allstädt/Verst sogar wortgleich, nur der
+  Name ausgetauscht. Diese sollten durch echte, individuelle Texte ersetzt
+  werden, die zur jeweiligen Person und Rolle passen.
+- [ ] Persönliche LinkedIn-Profile von Wolfgang van Vliet und Constanze Kraus
+  liegen nicht vor – falls gewünscht, URLs nachreichen, dann erscheint der
+  persönliche LinkedIn-Button auf der jeweiligen Profilseite und in der vCard.
+- [x] Geschäftsführung von Sonja Müller-Zaman auf Wolfgang van Vliet
+  umgestellt (Über uns, Impressum, Datenschutzerklärung); Sonja Müller-Zaman
+  vollständig von der Website entfernt (Team-Karte, Profilseite, vCard,
+  Porträts).
+- [x] Constanze Kraus (Unternehmenssteuerung und strategische Koordination)
+  mit Profilseite, vCard, Durchwahl 224 und Mobilnummer ergänzt.
+- [x] Persönliche LinkedIn-Profile für Dr. Frederik Allstädt und Carolin
+  Köhler sind hinterlegt.
 
 ## 3. Sonstiges / nice-to-have (kein Blocker)
 
@@ -91,9 +93,9 @@ Datenschutzerklärung wurde an die tatsächlich abgefragten Felder angepasst
   (kein Google-Fonts-CDN), keine Cookies, kein externes Tracking, der einzige
   externe Link (Google-Maps-Kartenlink auf `/kontakt`) ist ein normaler
   ausgehender Link (kein eingebettetes iframe) – keine Beanstandungen.
-- Bildnachweis ergänzt: dezenter nummerierter Hinweis direkt an Fotos/
-  Grafiken, vollständige Zuordnung im neuen Abschnitt "Bildnachweis" im
-  Impressum (13 Einträge).
+- Bildnachweis ergänzt: dezenter grauer Hinweis unter den Fotos/Grafiken
+  (Team-Porträts bewusst ohne Hinweis am Bild), "Bild N" verlinkt direkt auf
+  den passenden Eintrag im Abschnitt "Bildnachweis" im Impressum.
 - `kontakt.php`: liest jetzt auch Telefon/Unternehmen/Kategorie aus (vorher
   stillschweigend ignoriert) und verschickt eine formatierte HTML-Mail statt
   einer reinen Textzeile.

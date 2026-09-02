@@ -6,7 +6,7 @@ email: "F.Allstaedt@LCE-Ludwigshafen.de"
 phone: "+49 621 5604-275"
 linkedin: "https://www.linkedin.com/in/dr-frederik-allst%C3%A4dt-b64ba52a0/"
 image: "../../assets/images/2_2.png"
-order: 3
+order: 4
 hasProfile: true
 ---
 
